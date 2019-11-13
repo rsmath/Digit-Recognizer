@@ -31,6 +31,12 @@ Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c
 
 -------
 
+
+### Reference
+
+I have used images from the Coursera Deep Learning course mentioned above. I hereby attest that those images are not of my making.
+
+
 ### Contact
 
 If you have any concern or suggestion regarding this project, feel free to email me at [sharmar@bxscience.edu](sharmar@bxscience.edu).
