@@ -1,9 +1,9 @@
 # DIGIT RECOGNIZER
----------------------------
+
 
 ## PROJECT DESCRIPTION
 
----------------------------
+
 
 ### Introduction
 
@@ -20,7 +20,7 @@ I will be making my Vanilla NN in Python3 using the following libraries **__Note
 * Pandas - to load and store the image data
 * Matplotlib - to graph different values over time to tune the hyperparameters
 
-
+-------
 
 ### Dataset
 
@@ -28,12 +28,13 @@ I will be using data from a MNIST handwritten digit recognition competition from
 
 Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c/digit-recognizer/data)
 
+-------
 
 ### Contact
 
 If you have any concern or suggestion regarding this project, feel free to email me at [sharmar@bxscience.edu](sharmar@bxscience.edu).
 
-
+-------
 
 [1]: https://www.coursera.org/learn/neural-networks-deep-learning/
 [2]: https://www.coursera.org/specializations/deep-learning?
