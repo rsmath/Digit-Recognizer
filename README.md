@@ -10,6 +10,7 @@
 
 I recently finished the [Coursera Neural Networks and Deep Learning][1] course from [deeplearning.ai][2]. I am really excited to do this project to apply my knowledge of Vanilla Neural Networks now.
 
+-------
 
 ### Methodology
 
@@ -34,7 +35,7 @@ Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c
 
 If you have any concern or suggestion regarding this project, feel free to email me at [sharmar@bxscience.edu](sharmar@bxscience.edu).
 
--------
+
 
 [1]: https://www.coursera.org/learn/neural-networks-deep-learning/
 [2]: https://www.coursera.org/specializations/deep-learning?
