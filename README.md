@@ -15,7 +15,7 @@ I recently finished the [Coursera Neural Networks and Deep Learning][1] course f
 ### Methodology
 
 
-I will be making my Vanilla NN in Python3 using the following libraries **__Note, this list is as of November 13th 2019, it may change as the project develops further__**
+I will be making my Vanilla NN in Python3 using the following libraries      **__(Note, this list is as of November 13th 2019, it may change as the project develops further)__**
 
 * Numpy - To do all the major computations in the program
 * Pandas - to load and store the image data
