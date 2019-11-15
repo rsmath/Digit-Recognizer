@@ -8,7 +8,7 @@
 ### Introduction
 
 
-I recently finished the [Coursera Neural Networks and Deep Learning][1] course from [deeplearning.ai][2]. I am really excited to do this project to apply my knowledge of Vanilla Neural Networks now.
+I recently finished the [Coursera Neural Networks and Deep Learning][1] course from [deeplearning.ai][2]. I am really excited to do this project and apply my knowledge of Vanilla Neural Networks now.
 
 -------
 
