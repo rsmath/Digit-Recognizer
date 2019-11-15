@@ -34,9 +34,7 @@ Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c
 ### Exploring the training data
 
 Below is an image of different examples of digits given in the training data. Please refer to the above Jupyter notebook to see how I obtained this image.
-
 ![Digits from 0-9](digits.png?raw=true "Digits from 0-9")
-
 -------
 
 ### Contact
