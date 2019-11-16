@@ -21,6 +21,15 @@ I will be making my Vanilla NN in Python3 using the following libraries      **_
 * Pandas - to load and store the image data
 * Matplotlib - to graph different values over time to tune the hyperparameters
 
+
+-------
+
+### Network Architecture
+
+The neural network will be a L-layer network. This means that I will be testing the best efficiency using different number of layers (having different number of neurons).
+
+
+
 -------
 
 ### Dataset
