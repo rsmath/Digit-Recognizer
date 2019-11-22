@@ -15,7 +15,7 @@ def relu(a):
 
     cache = a # cache is used in backprop
 
-    return max(0, a), cache
+    return np.maximum(0, a), cache
 
 def sigmoid_backward(dA, cache):
     # returns the gradient of cost with respect to Z, dZ
@@ -33,9 +33,9 @@ def relu_backward(dA, cache):
 
     Z = cache
 
-    dZ = np.array(dA, copy=True) # need dZ to be a numpy array for next step
+    dZ = np.ones_like(dA) # need dZ to be a numpy array for next step
 
-    dZ[Z <= 0] = 0 # gradient is 0 for z <= 0
+    dZ[Z <= 0] = 0 # gradient is 0 for z <= 0 otherwise 1 for rest
 
     return dZ
 
