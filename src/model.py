@@ -3,6 +3,7 @@ The main model file. Here all the different functions will be pieced together to
 If the size of the NN is desired to be changed, it can be done in the layer_dims array.
 """
 
+
 import numpy as np
 from matplotlib import pyplot as plt
 

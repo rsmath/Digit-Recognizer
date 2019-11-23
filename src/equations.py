@@ -6,22 +6,34 @@ These functions are: sigmoid, relu, sigmoid_backward, relu_backward
 
 import numpy as np
 
-def sigmoid(z):
-    # returning the sigmoid value of the passed parameter
+def sigmoid(Z):
+    """
+    computing sigmoid of Z
+    :param Z: input
+    :return: sigmoid and cache (z)
+    """
 
-    cache = z # cache is used in backprop
+    cache = Z # cache is used in backprop
 
-    return 1 / (1 + np.exp(-z)), cache
+    return 1 / (1 + np.exp(-Z)), cache
 
-def relu(z):
-    # returning the relu activation function value of the parameter
+def relu(Z):
+    """
+    computing relu of Z
+    :param Z: input
+    :return: relu and cache (Z)
+    """
+    cache = Z # cache is used in backprop
 
-    cache = z # cache is used in backprop
-
-    return np.maximum(0, z), cache
+    return np.maximum(0, Z), cache
 
 def sigmoid_backward(dA, cache):
-    # returns the gradient of cost with respect to Z, dZ
+    """
+    computing dZ
+    :param dA: dA of current layer
+    :param cache: Z from sigmoid
+    :return: dZ
+    """
 
     Z = cache
 
@@ -32,7 +44,12 @@ def sigmoid_backward(dA, cache):
     return dZ
 
 def relu_backward(dA, cache):
-    # returns the gradient of cost with respect to Z, dZ for relu function
+    """
+    computing dZ
+    :param dA: dA of current layer
+    :param cache: Z from relu
+    :return: dZ
+    """
 
     Z = cache
 

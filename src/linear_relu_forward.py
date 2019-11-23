@@ -3,6 +3,7 @@ This file will implement the forward propagation of the model
 Separate functions will be defined so that any form of input will work
 """
 
+
 import numpy as np
 from src.equations import sigmoid, relu
 
