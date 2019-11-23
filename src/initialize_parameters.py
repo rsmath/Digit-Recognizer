@@ -6,6 +6,7 @@ The weights, W, and the biases, b, will be generated for the neural network's la
 
 import numpy as np
 
+
 parameters = {}
 
 def initialize_parameters(layers):

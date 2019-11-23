@@ -4,6 +4,8 @@ This module will compute the cost of each iteration of forward prop
 
 
 import numpy as np
+
+
 from src.prep_data import labels
 
 y = []

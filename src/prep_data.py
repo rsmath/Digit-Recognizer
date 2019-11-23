@@ -7,6 +7,7 @@ Data will be divided into train, cross validation, and test
 import numpy as np
 import pandas as pd
 
+
 data = pd.read_csv('../digit-recognizer/train.csv')
 
 labels = np.asarray(data['label']) # can be used as y, the true values

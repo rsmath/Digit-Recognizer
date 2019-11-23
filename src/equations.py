@@ -6,6 +6,7 @@ These functions are: sigmoid, relu, sigmoid_backward, relu_backward
 
 import numpy as np
 
+
 def sigmoid(Z):
     """
     computing sigmoid of Z

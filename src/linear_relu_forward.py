@@ -7,6 +7,7 @@ Separate functions will be defined so that any form of input will work
 import numpy as np
 from src.equations import sigmoid, relu
 
+
 def forward(A_prev, W, b):
     """
     simply computing the value of z

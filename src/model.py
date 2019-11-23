@@ -7,6 +7,7 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 import numpy as np
 from matplotlib import pyplot as plt
 
+
 plt.rcParams['figure.figsize'] = (15.0, 15.0) # set default size of plots
 
 

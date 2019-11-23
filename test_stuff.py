@@ -4,8 +4,8 @@
 
 import pandas as pd
 import numpy as np
-
 from matplotlib import pyplot as plt
+
 
 training_data = pd.read_csv("../digit-recognizer/train.csv", index_col=0)
 test_data = pd.read_csv("../digit-recognizer/test.csv")
