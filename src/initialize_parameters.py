@@ -10,7 +10,12 @@ L = len(layers)
 
 parameters = {}
 
-for i in range(1, L):
-    parameters['W' + str(i)] = np.random.randn(layers[i], layers[i - 1]) * 0.01
-    parameters['b' + str(i)] = np.zeros((layers[i], 1))
+def initialize_parameters(layers):
+    # this function will be imported in model to initialize paramters
+    # returns parameters
 
+    for i in range(1, L):
+        parameters['W' + str(i)] = np.random.randn(layers[i], layers[i - 1]) * 0.01
+        parameters['b' + str(i)] = np.zeros((layers[i], 1))
+
+    return parameters
