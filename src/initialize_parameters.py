@@ -8,8 +8,11 @@ import numpy as np
 parameters = {}
 
 def initialize_parameters(layers):
-    # this function will be imported in model to initialize paramters
-    # returns parameters
+    """
+    initializes the parameters for the layers passed
+    :param layers: a list of layer dimensions
+    :return: dictionary containing different parameters, W1, W2, b1, b2, etc.
+    """
 
     L = len(layers)
 
@@ -18,3 +21,4 @@ def initialize_parameters(layers):
         parameters['b' + str(i)] = np.zeros((layers[i], 1))
 
     return parameters
+
