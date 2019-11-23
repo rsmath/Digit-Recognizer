@@ -1,7 +1,7 @@
-'''
+"""
 This file will contain the different mathematical functions that the model will require
 These functions are: sigmoid, relu, sigmoid_backward, relu_backward
-'''
+"""
 
 
 import numpy as np

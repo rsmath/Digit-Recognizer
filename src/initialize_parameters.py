@@ -1,7 +1,7 @@
-'''
+"""
 This file will initialize all the required parameters
 The weights, W, and the biases, b, will be generated for the neural network's layers
-'''
+"""
 
 import numpy as np
 from src.model import layers # importing the layers of the different hidden layers
