@@ -40,7 +40,7 @@ def sigmoid_backward(dA, cache):
 
     s = 1 / (1 + np.exp(-Z))
 
-    dZ = dA * s * (1 - s) # derivative of cost with respect to Z for sigmoid function
+    dZ = np.multiply(dA, s * (1 - s)) # derivative of cost with respect to Z for sigmoid function
 
     return dZ
 
