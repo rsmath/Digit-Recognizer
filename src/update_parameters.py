@@ -15,3 +15,8 @@ def update_parameters(parameters, gradients, alpha=0.1):
     L = len(parameters) // 2
 
     for l in range(1, L):
+        parameters['dW' + str(l)] -= alpha * gradients[l][0]
+        parameters['db' + str(l)] -= alpha * gradients[l][1]
+
+    return parameters
+
