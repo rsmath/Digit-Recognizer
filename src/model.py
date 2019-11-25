@@ -6,6 +6,7 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 import numpy as np
 from matplotlib import pyplot as plt
 from src.prep_data import train_data, test_data
+from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
 from src.update_parameters import update_parameters
 from src.linear_relu_forward import L_model_forward
@@ -26,7 +27,7 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, layer_dimensions=layer_dims):
+    def __init__(self, layer_dimensions=layer_dims, iterations=3000, learning_rate=0.0075, print_cost=False):
         """
         initiating the model object
         :param layer_dimensions: dimensions of each layer (and number of layers) set by the user
@@ -34,6 +35,9 @@ class VanillaNN:
 
         self.layer_dims = layer_dimensions  # user can be allowed to pass in the neural network architecture
         self.weights = None
+        self.iterations = iterations
+        self.learning_rate = learning_rate
+        self.print_cost = print_cost
 
     def train(self, X, y):
         """
@@ -43,7 +47,12 @@ class VanillaNN:
         """
 
         # first the weights need to be initialized
-        self.weights =
+        self.weights = initialize_parameters(self.layer_dims)
+
+        # now for each cycle of iterations
+        for i in range(1, self.iterations):
+
+
 
 
 

@@ -7,9 +7,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-training_data = pd.read_csv("../digit-recognizer/train.csv", index_col=0)
-test_data = pd.read_csv("../digit-recognizer/test.csv")
-sample_submission = pd.read_csv("../digit-recognizer/sample_submission.csv", index_col='ImageId')
+# training_data = pd.read_csv("../digit-recognizer/train.csv", index_col=0)
+# test_data = pd.read_csv("../digit-recognizer/test.csv")
+# sample_submission = pd.read_csv("../digit-recognizer/sample_submission.csv", index_col='ImageId')
 
 
 # print(training_data.shape) # 42000x784
@@ -22,10 +22,18 @@ sample_submission = pd.read_csv("../digit-recognizer/sample_submission.csv", ind
 # print(sample_submission.head())
 #
 #
-print('\b\b\b\b\b\b\b\b\b\b\b')
+# print('\b\b\b\b\b\b\b\b\b\b\b')
+#
+# print(str(0.6 * 70) + " " + str(0.2 * 70) + " " + str(0.2 * 70))
+#
+#
+# temp = np.zeros((10,), dtype=int)
+# print(temp)
+#
 
-print(str(0.6 * 70) + " " + str(0.2 * 70) + " " + str(0.2 * 70))
 
+L = 10
 
-temp = np.zeros((10,), dtype=int)
-print(temp)
+for i in range(L - 1, 1, -1):
+    print(i)
+

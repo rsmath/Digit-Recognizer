@@ -66,7 +66,7 @@ def L_model_backward(AL, caches):
 
     dA = dA_prev
 
-    for l in range(L - 1, 2, -1):
+    for l in range(L - 1, 1, -1):
         gradient, dA_prev = linear_backward(dA, caches[l], 'sigmoid')
         gradients.append(gradient)
         dA = dA_prev
