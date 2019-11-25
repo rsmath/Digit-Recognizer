@@ -5,7 +5,7 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 
 import numpy as np
 from matplotlib import pyplot as plt
-from src.prep_data import train_data, test_data
+from src.prep_data import train_data, test_data, y
 from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
 from src.update_parameters import update_parameters
@@ -34,32 +34,65 @@ class VanillaNN:
         """
 
         self.layer_dims = layer_dimensions  # user can be allowed to pass in the neural network architecture
-        self.weights = None
+        self.parameters = None
         self.iterations = iterations
         self.learning_rate = learning_rate
         self.print_cost = print_cost
 
         self.costs = []
 
-    def train(self, X, y):
+    def train(self, X=train_data, Y=y):
         """
         this is the most important function. Here, all the helper functions will be called and model will be trained
+        :param Y: label values of the images
         :param X: set of all the images (pixel arrays), in order to train this supervised model
         :return:
         """
 
-        # first the weights need to be initialized
-        self.weights = initialize_parameters(self.layer_dims)
+        # first the parameters need to be initialized
+        self.parameters = initialize_parameters(self.layer_dims)
 
         # now for each cycle of iterations
         for i in range(1, self.iterations + 1):
 
             # forward propagation run
-            AL, caches = L_model_forward(X, self.weights)
+            AL, caches = L_model_forward(X, self.parameters)
 
             # cost is stored
-            cost = compute_cost(AL, y)
+            cost = compute_cost(AL, Y)
             self.costs.append(cost)
+
+            # back propagation will be run
+            gradients = L_model_backward(AL, caches) # gradients
+
+            # parameters/parameters will be updated
+            self.parameters = update_parameters(self.parameters, gradients, self.learning_rate)
+
+            # printing the cost every 100 iterations
+            if i % 100 == 0:
+                print(f"Cost for iteration # {i}:  {cost}")
+
+    def test(self, X_test=test_data):
+        """
+        computing the predicted digit of an image pixel array
+        :param X_test: image pixel array
+        :return: int of the predicted digit
+        """
+
+        AL, _ = L_model_forward(X_test, self.parameters)
+
+        digit = np.where(AL == np.amax(AL))
+
+        fig = np.asarray(AL).reshape(28, 28)
+        plt.title(f"The test example digit is: {digit}")
+        plt.imshow(fig)
+        plt.show()
+
+
+
+
+
+
 
 
 
