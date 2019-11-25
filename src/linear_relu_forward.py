@@ -65,7 +65,7 @@ def L_model_forward(X, parameters):
         A, cache = linear_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)], 'relu')
         caches.append(cache) # adding layer l's linear and activated caches to be used in backpropagation
 
-    AL, cache = linear_forward(A, parameters['W' + str(L)], parameters['W' + str(L)], 'sigmoid')
+    AL, cache = linear_forward(A, parameters['W' + str(L)], parameters['b' + str(L)], 'sigmoid')
     caches.append(cache)
 
     return AL, caches
