@@ -17,7 +17,7 @@ def forward(A_prev, W, b):
     :return: return value of z and cache of linear parameters, A_prev, W, b to be used in backpropagation
     """
 
-    Z = np.dot(W, np.transpose(A_prev)) + b
+    Z = np.dot(W, A_prev) + b
 
     # linear cache
     cache = (A_prev, W, b) # will be used later in backpropagation
@@ -60,7 +60,7 @@ def L_model_forward(X, parameters):
     caches = []
     L = len(parameters) // 2 # for every layer there are W and b, so half of parameters are total number of layers
 
-    for l in range(1, L - 1):
+    for l in range(1, L):
         A_prev = A
         A, cache = linear_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)], 'relu')
         caches.append(cache) # adding layer l's linear and activated caches to be used in backpropagation
