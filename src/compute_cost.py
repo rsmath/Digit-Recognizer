@@ -4,10 +4,9 @@ This module will compute the cost of each iteration of forward prop
 
 
 import numpy as np
-from src.prep_data import y
 
 
-def compute_cost(AL):
+def compute_cost(AL, y):
     """
     computing the cost of the loss function given an iteration's output value
     :param AL: shape (42000, 10), each example's prediction being an array of 10 rounded values

@@ -39,6 +39,8 @@ class VanillaNN:
         self.learning_rate = learning_rate
         self.print_cost = print_cost
 
+        self.costs = []
+
     def train(self, X, y):
         """
         this is the most important function. Here, all the helper functions will be called and model will be trained
@@ -50,7 +52,16 @@ class VanillaNN:
         self.weights = initialize_parameters(self.layer_dims)
 
         # now for each cycle of iterations
-        for i in range(1, self.iterations):
+        for i in range(1, self.iterations + 1):
+
+            # forward propagation run
+            AL, caches = L_model_forward(X, self.weights)
+
+            # cost is stored
+            cost = compute_cost(AL, y)
+            self.costs.append(cost)
+
+
 
 
 
