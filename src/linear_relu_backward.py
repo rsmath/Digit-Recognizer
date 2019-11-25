@@ -6,7 +6,7 @@ Separate functions will be defined so that any form of input will work
 
 import numpy as np
 from src.equations import sigmoid_backward, relu_backward
-from src.compute_cost import m, y
+from src.prep_data import m, y
 
 
 def backward(dZ, caches):
