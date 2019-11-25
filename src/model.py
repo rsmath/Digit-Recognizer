@@ -17,6 +17,124 @@ layers = [784, 25, 7, 5, 10] # four layer model, 4th layer having 10 output unit
 layer_dims = np.array(layers)
 
 
+class VanillaNN:
+    """
+    The model object
+    This will have the train and test functions
+    """
+
+    def __init__(self, layer_dimensions):
+        self.layer_dims = layer_dimensions # user can be allowed to pass in the neural network architecture
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
