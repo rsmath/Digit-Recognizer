@@ -17,7 +17,7 @@ def forward(A_prev, W, b):
     :return: return value of z and cache of linear parameters, A_prev, W, b to be used in backpropagation
     """
 
-    Z = np.dot(W, A_prev) + b
+    Z = np.dot(W, np.transpose(A_prev)) + b
 
     # linear cache
     cache = (A_prev, W, b) # will be used later in backpropagation
