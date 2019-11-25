@@ -46,7 +46,7 @@ class VanillaNN:
         this is the most important function. Here, all the helper functions will be called and model will be trained
         :param Y: label values of the images
         :param X: set of all the images (pixel arrays), in order to train this supervised model
-        :return:
+        :return: None
         """
 
         # first the parameters need to be initialized
@@ -69,14 +69,14 @@ class VanillaNN:
             self.parameters = update_parameters(self.parameters, gradients, self.learning_rate)
 
             # printing the cost every 100 iterations
-            if i % 100 == 0:
+            if i % 100 == 0 and self.print_cost:
                 print(f"Cost for iteration # {i}:  {cost}")
 
     def test(self, X_test=test_data):
         """
         computing the predicted digit of an image pixel array
         :param X_test: image pixel array
-        :return: int of the predicted digit
+        :return: None
         """
 
         AL, _ = L_model_forward(X_test, self.parameters)
