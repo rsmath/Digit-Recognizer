@@ -5,6 +5,11 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 
 import numpy as np
 from matplotlib import pyplot as plt
+from src.prep_data import train_data, test_data
+from src.compute_cost import compute_cost
+from src.update_parameters import update_parameters
+from src.linear_relu_forward import L_model_forward
+from src.linear_relu_backward import L_model_backward
 
 
 plt.rcParams['figure.figsize'] = (15.0, 15.0)  # set default size of plots
@@ -36,3 +41,71 @@ class VanillaNN:
         :param X: set of all the images (pixel arrays), in order to train this supervised model
         :return:
         """
+
+        # first the weights need to be initialized
+        self.weights =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
