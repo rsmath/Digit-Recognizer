@@ -26,6 +26,7 @@ for i in range(m):
     y.append(temp)
 
 y = np.asarray(y) # shape (42000, 10), a 1 for each label digit's position in an empty (10,) zeros array
+y = np.transpose(y) # fixes a bug and changes shape of y to (10, 42000)
 
 '''
 FOR NOW THERE WILL BE NO CROSS VALIDATION TEST. AFTER A PRELIMINARY MODEL HAS BEEN MADE AND TESTED, 

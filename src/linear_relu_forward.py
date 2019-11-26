@@ -19,6 +19,8 @@ def forward(A_prev, W, b):
 
     Z = np.dot(W, A_prev) + b
 
+    assert (Z.shape == (W.shape[0], A_prev.shape[1]))
+
     # linear cache
     cache = (A_prev, W, b) # will be used later in backpropagation
 
@@ -44,6 +46,8 @@ def linear_forward(A_prev, W, b, func):
         Z, linear_cache = forward(A_prev, W, b)
         A, activated_cache = relu(Z)
 
+    assert (A.shape == (W.shape[0], A_prev.shape[1]))
+
     cache = (linear_cache, activated_cache)
 
     return A, cache
@@ -67,6 +71,8 @@ def L_model_forward(X, parameters):
 
     AL, cache = linear_forward(A, parameters['W' + str(L)], parameters['b' + str(L)], 'sigmoid')
     caches.append(cache)
+
+    assert (AL.shape == (10, X.shape[1]))
 
     return AL, caches
 

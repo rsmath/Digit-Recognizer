@@ -14,9 +14,13 @@ def sigmoid(Z):
     :return: sigmoid and cache (z)
     """
 
+    A = 1 / (1 + np.exp(-Z))
+
+    assert (A.shape == Z.shape)
+
     cache = Z # cache is used in backprop
 
-    return 1 / (1 + np.exp(-Z)), cache
+    return A, cache
 
 def relu(Z):
     """
@@ -24,9 +28,14 @@ def relu(Z):
     :param Z: input
     :return: relu and cache (Z)
     """
+
+    A = np.maximum(0, Z)
+
+    assert (A.shape == Z.shape)
+
     cache = Z # cache is used in backprop
 
-    return np.maximum(0, Z), cache
+    return A, cache
 
 def sigmoid_backward(dA, cache):
     """
@@ -41,6 +50,8 @@ def sigmoid_backward(dA, cache):
     s = 1 / (1 + np.exp(-Z))
 
     dZ = np.multiply(dA, s * (1 - s)) # derivative of cost with respect to Z for sigmoid function
+
+    assert (dZ.shape == Z.shape)
 
     return dZ
 
@@ -57,6 +68,8 @@ def relu_backward(dA, cache):
     dZ = np.ones_like(dA) # need dZ to be z numpy array for next step
 
     dZ[Z <= 0] = 0 # gradient is 0 for z <= 0 otherwise 1 for rest
+
+    assert (dZ.shape == Z.shape)
 
     return dZ
 

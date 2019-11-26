@@ -20,9 +20,9 @@ def backward(dZ, caches):
     linear_cache, _ = caches
     W, b, A_prev = linear_cache
 
-    dW = (1 / m) * np.dot(dZ, np.transpose(A_prev))
+    dW = (1 / m) * np.dot(dZ, A_prev)
     db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
-    dA_prev = np.dot(np.transpose(W), dZ)
+    dA_prev = np.dot(W, dZ)
 
     return (dW, db), dA_prev
 
@@ -58,16 +58,16 @@ def L_model_backward(AL, caches):
     """
 
     gradients = []
-    L = len(caches)
+    L = len(caches) - 1
     dA = (-y / AL) + ((1 - y) / (1 - AL)) # dA[L] of final layer
 
-    gradient, dA_prev = linear_backward(dA, caches[L], 'relu')
+    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid')
     gradients.append(gradient)
 
     dA = dA_prev
 
     for l in range(L - 1, 1, -1):
-        gradient, dA_prev = linear_backward(dA, caches[l], 'sigmoid')
+        gradient, dA_prev = linear_backward(dA, caches[l], 'relu')
         gradients.append(gradient)
         dA = dA_prev
 
