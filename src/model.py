@@ -57,6 +57,8 @@ class VanillaNN:
         :return: None
         """
 
+        costs = []
+
         # first the parameters need to be initialized
         self.parameters = initialize_parameters(self.layer_dims)
 
@@ -78,7 +80,10 @@ class VanillaNN:
 
             # printing the cost every 100 iterations
             if (i == 0 or i % 10 == 0) and self.print_cost:
+                costs.append(cost)
                 print(f"Cost for iteration # {i}:  {cost}")
+
+        return costs
 
     def test(self, X_test=test_data):
         """

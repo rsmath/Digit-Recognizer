@@ -8,12 +8,12 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-layers = [784, 10, 5, 10]
+layers = [784, 25, 15, 15, 10]
 
-model = VanillaNN(layer_dims=layers, iterations=1000, learning_rate=0.01, print_cost=True)
+model = VanillaNN(layer_dims=layers, iterations=3000, learning_rate=0.075, print_cost=True)
 
 if __name__ == "__main__":
-    model.train()
+    costs = model.train()
     X_test = test_data[np.random.randint(28000)].reshape(784, 1) # random image
     output = model.test(X_test)
     digit = np.where(output == np.amax(output))[0][0]
