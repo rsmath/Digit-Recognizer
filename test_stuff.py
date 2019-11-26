@@ -47,8 +47,9 @@ grads = [(1, 2), (4, 5), (5, 6)]
 print(grads[0][1])
 
 
-
-
+for i in range(20):
+    d = np.random.randint(5)
+    print(d)
 
 
 

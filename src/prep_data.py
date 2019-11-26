@@ -16,7 +16,7 @@ data.set_index('label', inplace=True) # permanently sets label column to be the 
 
 train_data = np.asarray(data)
 train_data = np.transpose(train_data) # this fixes a small bug, changes shape to (784, 42000)
-test_data = np.asarray(pd.read_csv('../digit-recognizer/test.csv'))
+test_data = np.asarray(pd.read_csv('../digit-recognizer/test.csv')) # shape (28000, 784)
 
 m = len(labels) # m
 y = []

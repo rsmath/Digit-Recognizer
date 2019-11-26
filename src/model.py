@@ -15,7 +15,7 @@ from src.linear_relu_backward import L_model_backward
 
 plt.rcParams['figure.figsize'] = (15.0, 15.0)  # set default size of plots
 
-layers = [784, 25, 7, 5, 10]  # four layer model, 4th layer having 10 output units which will be rounded off and highest
+layers = [784, 5, 5, 10]  # four layer model, 4th layer having 10 output units which will be rounded off and highest
 # probability will be the predicted digit
 
 layer_dims = np.array(layers)  # default dimensions of layers
@@ -27,7 +27,7 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, parameters=None, layer_dimensions=layer_dims, iterations=1000, learning_rate=0.0075,
+    def __init__(self, parameters=None, layer_dimensions=layer_dims, iterations=50, learning_rate=0.0075,
                  print_cost=False):
         """
         initiating the model object
@@ -92,78 +92,4 @@ class VanillaNN:
         plt.title(f"The test example digit is: {digit}")
         plt.imshow(fig)
         plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
