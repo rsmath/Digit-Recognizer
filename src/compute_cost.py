@@ -18,5 +18,7 @@ def compute_cost(AL, y):
     cost = (-1 / m) * np.sum(np.multiply(y, np.log(AL)) + np.multiply(1 - y, np.log(1 - AL)))
     cost = np.squeeze(cost) # turns [[17]] into 17
 
+    assert (cost.shape == ())
+
     return cost
 

@@ -9,7 +9,7 @@ from src.equations import sigmoid_backward, relu_backward
 from src.prep_data import m, y
 
 
-def backward(dZ, caches):
+def backward(dZ, caches, last = False):
     """
     computing the gradients of cost with respect to W, b and A, aka dW, db, and dA[L-1]
     :param dZ: dZ of current layer
@@ -18,15 +18,19 @@ def backward(dZ, caches):
     """
 
     linear_cache, _ = caches
-    W, b, A_prev = linear_cache
+    A_prev, W, b = linear_cache
 
-    dW = (1 / m) * np.dot(dZ, A_prev)
+    dW = (1 / m) * np.dot(dZ, np.transpose(A_prev))
     db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
-    dA_prev = np.dot(W, dZ)
+    dA_prev = np.dot(np.transpose(W), dZ)
+
+    assert (dW.shape == W.shape)
+    assert (db.shape == b.shape)
+    assert (dA_prev.shape == A_prev.shape)
 
     return (dW, db), dA_prev
 
-def linear_backward(dA, caches, func):
+def linear_backward(dA, caches, func, last = False):
     """
     computing the entire backward prop gradients based on the activation function
     :param dA: gradient of cost function with respect to current layer's activations
@@ -41,7 +45,7 @@ def linear_backward(dA, caches, func):
 
     if func == 'sigmoid':
         dZ = sigmoid_backward(dA, Z) # implementation for sigmoid_backward handles the dZ calculation
-        gradient, dA_prev = backward(dZ, caches)
+        gradient, dA_prev = backward(dZ, caches, last)
 
     elif func == 'relu':
         dZ = relu_backward(dA, Z) # implementation for relu_backward handles the dZ calculation
@@ -61,12 +65,12 @@ def L_model_backward(AL, caches):
     L = len(caches) - 1
     dA = (-y / AL) + ((1 - y) / (1 - AL)) # dA[L] of final layer
 
-    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid')
+    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid', last = True)
     gradients.append(gradient)
 
     dA = dA_prev
 
-    for l in range(L - 1, 1, -1):
+    for l in range(L - 1, -1, -1):
         gradient, dA_prev = linear_backward(dA, caches[l], 'relu')
         gradients.append(gradient)
         dA = dA_prev
