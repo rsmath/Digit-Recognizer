@@ -7,7 +7,10 @@ from src.prep_data import test_data
 from matplotlib import pyplot as plt
 import numpy as np
 
-model = VanillaNN(iterations=1000, learning_rate=0.01, print_cost=True)
+
+layers = [784, 10, 5, 10]
+
+model = VanillaNN(layer_dims=layers, iterations=1000, learning_rate=0.01, print_cost=True)
 
 if __name__ == "__main__":
     model.train()

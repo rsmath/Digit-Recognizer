@@ -15,10 +15,8 @@ from src.linear_relu_backward import L_model_backward
 
 plt.rcParams['figure.figsize'] = (10.0, 10.0)  # set default size of plots
 
-layers = [784, 10, 5, 10]  # four layer model, 4th layer having 10 output units which will be rounded off and highest
-# probability will be the predicted digit
-
-layer_dims = np.array(layers)  # default dimensions of layers
+layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
+# highest probability will be the predicted digit
 
 
 class VanillaNN:
@@ -27,18 +25,23 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, parameters=None, layer_dimensions=layer_dims, iterations=3000, learning_rate=0.0075,
+    def __init__(self, parameters=None, layer_dims=None, iterations=3000, learning_rate=0.0075,
                  print_cost=False):
         """
         initiating the model object
         :param parameters: if passed by user (saw while testing)
-        :param layer_dimensions: network architecture
+        :param layer_dims: network architecture
         :param iterations: gradient descent runs for these many iterations
         :param learning_rate: alpha in gradient descent
         :param print_cost: if required, cost may be printed
         """
 
-        self.layer_dims = layer_dimensions  # user can be allowed to pass in the neural network architecture
+        if layer_dims is None:
+            self.layer_dims = layer_dimensions
+
+        else:
+            self.layer_dims = layer_dims  # user can be allowed to pass in the neural network architecture
+
         self.parameters = parameters
         self.iterations = iterations
         self.learning_rate = learning_rate
