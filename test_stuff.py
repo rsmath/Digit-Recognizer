@@ -44,17 +44,18 @@ from matplotlib import pyplot as plt
 grads = [(1, 2), (4, 5), (5, 6)]
 
 
-print(grads[0][1])
+# print(grads[0][1])
 
 
-for i in range(20):
-    d = np.random.randint(5)
-    print(d)
+# for i in range(20):
+#     d = np.random.randint(5)
+#     print(d)
 
 
+f = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 4, 5, 6, 6, 11])
 
-
-
+d = np.where(f == np.amax(f))
+print(d[0])
 
 
 
