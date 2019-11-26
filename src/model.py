@@ -27,7 +27,7 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, layer_dimensions=layer_dims, iterations=3000, learning_rate=0.0075, print_cost=False):
+    def __init__(self, layer_dimensions=layer_dims, iterations=1000, learning_rate=0.0075, print_cost=False):
         """
         initiating the model object
         :param layer_dimensions: dimensions of each layer (and number of layers) set by the user
@@ -69,7 +69,7 @@ class VanillaNN:
             self.parameters = update_parameters(self.parameters, gradients, self.learning_rate)
 
             # printing the cost every 100 iterations
-            if i % 100 == 0 and self.print_cost:
+            if (i == 0 or i % 10 == 0) and self.print_cost:
                 print(f"Cost for iteration # {i}:  {cost}")
 
     def test(self, X_test=test_data):
