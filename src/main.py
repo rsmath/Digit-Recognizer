@@ -20,6 +20,10 @@ if __name__ == "__main__":
     fig = np.asarray(X_test).reshape(28, 28)
     plt.title(f"The test example digit is: {digit}")
     plt.imshow(fig)
+    plt.plot(np.squeeze(costs))
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per tens)')
+    plt.title("Learning rate =" + str(0.075))
     plt.show()
 
 
