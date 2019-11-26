@@ -85,9 +85,6 @@ class VanillaNN:
         """
 
         AL, _ = L_model_forward(X_test, self.parameters)
-        digit = np.where(AL == np.amax(AL))[0][0]
-        fig = np.asarray(X_test).reshape(28, 28)
-        plt.title(f"The test example digit is: {digit}")
-        plt.imshow(fig)
-        plt.show()
+
+        return AL
 
