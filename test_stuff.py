@@ -31,9 +31,32 @@ from matplotlib import pyplot as plt
 # print(temp)
 #
 
+# vars = []
+# L = 10
+#
+# for i in range(1, 10):
+#     print(i)
+#     vars.append(i)
+#
+# print(vars)
 
-L = 10
 
-for i in range(4, -1, -1):
-    print(i)
+grads = [(1, 2), (4, 5), (5, 6)]
+
+
+print(grads[0][1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

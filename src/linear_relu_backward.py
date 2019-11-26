@@ -9,7 +9,7 @@ from src.equations import sigmoid_backward, relu_backward
 from src.prep_data import m, y
 
 
-def backward(dZ, caches, last = False):
+def backward(dZ, caches):
     """
     computing the gradients of cost with respect to W, b and A, aka dW, db, and dA[L-1]
     :param dZ: dZ of current layer
@@ -30,7 +30,7 @@ def backward(dZ, caches, last = False):
 
     return (dW, db), dA_prev
 
-def linear_backward(dA, caches, func, last = False):
+def linear_backward(dA, caches, func):
     """
     computing the entire backward prop gradients based on the activation function
     :param dA: gradient of cost function with respect to current layer's activations
@@ -45,11 +45,11 @@ def linear_backward(dA, caches, func, last = False):
 
     if func == 'sigmoid':
         dZ = sigmoid_backward(dA, Z) # implementation for sigmoid_backward handles the dZ calculation
-        gradient, dA_prev = backward(dZ, caches, last)
+        gradient, dA_prev = backward(dZ, caches)
 
     elif func == 'relu':
         dZ = relu_backward(dA, Z) # implementation for relu_backward handles the dZ calculation
-        gradient = backward(dZ, caches)
+        gradient, dA_prev = backward(dZ, caches)
 
     return gradient, dA_prev
 
@@ -65,7 +65,7 @@ def L_model_backward(AL, caches):
     L = len(caches) - 1
     dA = (-y / AL) + ((1 - y) / (1 - AL)) # dA[L] of final layer
 
-    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid', last = True)
+    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid')
     gradients.append(gradient)
 
     dA = dA_prev
@@ -74,6 +74,8 @@ def L_model_backward(AL, caches):
         gradient, dA_prev = linear_backward(dA, caches[l], 'relu')
         gradients.append(gradient)
         dA = dA_prev
+
+    gradients = gradients[::-1] # going from first layer to last layer
 
     return gradients
 
