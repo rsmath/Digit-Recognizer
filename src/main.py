@@ -9,7 +9,6 @@ model = VanillaNN(print_cost=True)
 
 if __name__ == "__main__":
     model.train()
-    print(model.parameters)
 
 
 

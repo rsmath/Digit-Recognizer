@@ -27,14 +27,19 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, layer_dimensions=layer_dims, iterations=1000, learning_rate=0.0075, print_cost=False):
+    def __init__(self, parameters=None, layer_dimensions=layer_dims, iterations=1000, learning_rate=0.0075,
+                 print_cost=False):
         """
         initiating the model object
-        :param layer_dimensions: dimensions of each layer (and number of layers) set by the user
+        :param parameters: if passed by user (saw while testing)
+        :param layer_dimensions: network architecture
+        :param iterations: gradient descent runs for these many iterations
+        :param learning_rate: alpha in gradient descent
+        :param print_cost: if required, cost may be printed
         """
 
         self.layer_dims = layer_dimensions  # user can be allowed to pass in the neural network architecture
-        self.parameters = None
+        self.parameters = parameters
         self.iterations = iterations
         self.learning_rate = learning_rate
         self.print_cost = print_cost
