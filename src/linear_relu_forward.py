@@ -5,7 +5,7 @@ Separate functions will be defined so that any form of input will work
 
 
 import numpy as np
-from src.equations import sigmoid, relu
+from src.equations import softmax, relu
 
 
 def forward(A_prev, W, b):
@@ -32,15 +32,15 @@ def linear_forward(A_prev, W, b, func):
     :param A_prev: activations of previous layer
     :param W: parameters for this layer
     :param b: bias for this layer
-    :param func: relu or sigmoid
+    :param func: relu or softmax
     :return: activated values A plus linear cache and activated cache (z values)
     """
 
     linear_cache, activated_cache, A = None, None, None
 
-    if func == "sigmoid":
+    if func == "softmax":
         Z, linear_cache = forward(A_prev, W, b)
-        A, activated_cache = sigmoid(Z)
+        A, activated_cache = softmax(Z)
 
     elif func == "relu":
         Z, linear_cache = forward(A_prev, W, b)
@@ -69,7 +69,7 @@ def L_model_forward(X, parameters):
         A, cache = linear_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)], 'relu')
         caches.append(cache) # adding layer l's linear and activated caches to be used in backpropagation
 
-    AL, cache = linear_forward(A, parameters['W' + str(L)], parameters['b' + str(L)], 'sigmoid')
+    AL, cache = linear_forward(A, parameters['W' + str(L)], parameters['b' + str(L)], 'softmax')
     caches.append(cache)
 
     assert (AL.shape == (10, X.shape[1]))

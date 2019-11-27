@@ -1,26 +1,48 @@
 """
 This file will contain the different mathematical functions that the model will require
-These functions are: sigmoid, relu, sigmoid_backward, relu_backward
+These functions are: softmax, relu, softmax_backward, relu_backward
 """
 
 
 import numpy as np
 
 
-def sigmoid(Z):
+def softmax(Z):
     """
-    computing sigmoid of Z
+    computing softmax of Z
     :param Z: input
-    :return: sigmoid and cache (z)
+    :return: softmax and cache (z)
     """
 
-    A = 1 / (1 + np.exp(-Z))
+    e_Z = np.exp(Z - np.max(Z))
+
+    A = e_Z / e_Z.sum(axis=0)  # only difference
 
     assert (A.shape == Z.shape)
 
-    cache = Z # cache is used in backprop
+    cache = Z
 
     return A, cache
+
+def softmax_backward(dA, cache):
+    """
+    computing dZ
+    :param dA: dA of current layer
+    :param cache: Z from softmax
+    :return: dZ
+    """
+
+    Z = cache
+
+    e_Z = np.exp(Z - np.max(Z))
+
+    s = e_Z / e_Z.sum(axis=0)
+
+    dZ = np.multiply(dA, s * (1 - s)) # derivative of cost with respect to Z for softmax function
+
+    assert (dZ.shape == Z.shape)
+
+    return dZ
 
 def relu(Z):
     """
@@ -37,24 +59,6 @@ def relu(Z):
 
     return A, cache
 
-def sigmoid_backward(dA, cache):
-    """
-    computing dZ
-    :param dA: dA of current layer
-    :param cache: Z from sigmoid
-    :return: dZ
-    """
-
-    Z = cache
-
-    s = 1 / (1 + np.exp(-Z))
-
-    dZ = np.multiply(dA, s * (1 - s)) # derivative of cost with respect to Z for sigmoid function
-
-    assert (dZ.shape == Z.shape)
-
-    return dZ
-
 def relu_backward(dA, cache):
     """
     computing dZ
@@ -65,7 +69,7 @@ def relu_backward(dA, cache):
 
     Z = cache
 
-    dZ = np.ones_like(dA) # need dZ to be z numpy array for next step
+    dZ = np.array(dA, copy=True)
 
     dZ[Z <= 0] = 0 # gradient is 0 for z <= 0 otherwise 1 for rest
 

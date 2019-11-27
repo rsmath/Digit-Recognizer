@@ -5,7 +5,7 @@ Separate functions will be defined so that any form of input will work
 
 
 import numpy as np
-from src.equations import sigmoid_backward, relu_backward
+from src.equations import softmax_backward, relu_backward
 from src.prep_data import m, y
 
 
@@ -35,7 +35,7 @@ def linear_backward(dA, caches, func):
     computing the entire backward prop gradients based on the activation function
     :param dA: gradient of cost function with respect to current layer's activations
     :param caches: packed tuple (linear_cache, activated cache)
-    :param func: activation function (relu or sigmoid)
+    :param func: activation function (relu or softmax)
     :return: dW, db, dA_prev
     """
 
@@ -43,8 +43,8 @@ def linear_backward(dA, caches, func):
     _, activated_cache = caches
     Z = activated_cache
 
-    if func == 'sigmoid':
-        dZ = sigmoid_backward(dA, Z) # implementation for sigmoid_backward handles the dZ calculation
+    if func == 'softmax':
+        dZ = softmax_backward(dA, Z) # implementation for softmax_backward handles the dZ calculation
         gradient, dA_prev = backward(dZ, caches)
 
     elif func == 'relu':
@@ -56,7 +56,7 @@ def linear_backward(dA, caches, func):
 def L_model_backward(AL, caches):
     """
     computing the gradients for all the layers
-    :param AL: output value of final layer after sigmoid activation
+    :param AL: output value of final layer after softmax activation
     :param caches: accumulated caches of all the layers
     :return: accumulated gradients of all the layers to be used by update_parameters
     """
@@ -65,7 +65,7 @@ def L_model_backward(AL, caches):
     L = len(caches) - 1
     dA = (-y / AL) + ((1 - y) / (1 - AL)) # dA[L] of final layer
 
-    gradient, dA_prev = linear_backward(dA, caches[L], 'sigmoid')
+    gradient, dA_prev = linear_backward(dA, caches[L], 'softmax')
     gradients.append(gradient)
 
     dA = dA_prev
