@@ -69,7 +69,7 @@ def relu_backward(dA, cache):
 
     Z = cache
 
-    dZ = np.array(dA, copy=True)
+    dZ = np.ones_like(dA) # gradient is 1 for z > 0
 
     dZ[Z <= 0] = 0 # gradient is 0 for z <= 0 otherwise 1 for rest
 
