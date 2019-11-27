@@ -51,11 +51,21 @@ grads = [(1, 2), (4, 5), (5, 6)]
 #     d = np.random.randint(5)
 #     print(d)
 
+#
+# f = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 4, 5, 6, 6, 11])
+#
+# d = np.where(f == np.amax(f))
+# print(d[0])
 
-f = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 4, 5, 6, 6, 11])
 
-d = np.where(f == np.amax(f))
-print(d[0])
+a = np.arange(1, 11)
+print(f"a: {a}")
+b = np.array(a, copy=True)
 
+print(f"b: {b}")
 
+a = np.arange(5, 122)
+
+print(f"a now: {a}")
+print(f"b now: {b}")
 

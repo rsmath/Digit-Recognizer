@@ -15,7 +15,7 @@ def compute_cost(AL, y):
     :return: cost of the function L
     """
 
-    cost = (-1 / m) * np.sum(np.multiply(y, np.log(AL)) + np.multiply(1 - y, np.log(1 - AL)))
+    cost = -np.mean(y * np.log(AL + 1e-8)) # 1e-8 added to avoid dividing by 0
     cost = np.squeeze(cost) # turns [[17]] into 17
 
     assert (cost.shape == ())
