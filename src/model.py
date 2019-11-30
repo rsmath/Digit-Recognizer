@@ -25,7 +25,7 @@ class VanillaNN:
     This will have the train and test functions
     """
 
-    def __init__(self, parameters=None, layer_dims=None, iterations=3000, learning_rate=0.0075,
+    def __init__(self, parameters=None, layer_dims=None, iterations=3000, learning_rate=0.075,
                  print_cost=False):
         """
         initiating the model object

@@ -25,20 +25,16 @@ def softmax(Z):
     return A, cache
 
 
-def softmax_backward(dA, cache, y):
+def softmax_backward(AL, cache, y):
     """
-    computing dZ
-    :param dA: dA of current layer
-    :param cache: Z from softmax
+    computes dZ for softmax
+    :param cache: Z value
+    :param AL: output layer A value
+    :param y: ground truth
     :return: dZ
     """
-    AL = dA # dA is actually AL
 
     Z = cache
-
-    # e_Z = np.exp(Z - np.max(Z))
-    #
-    # s = e_Z / e_Z.sum(axis=0)
 
     dZ = AL - y  # derivative of cost with respect to Z for softmax function
 
