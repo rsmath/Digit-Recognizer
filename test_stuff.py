@@ -58,14 +58,28 @@ grads = [(1, 2), (4, 5), (5, 6)]
 # print(d[0])
 
 
-a = np.arange(1, 11)
-print(f"a: {a}")
-b = np.array(a, copy=True)
+# a = np.arange(1, 11)
+# print(f"a: {a}")
+# b = np.array(a, copy=True)
+#
+# print(f"b: {b}")
+#
+# a = np.arange(5, 122)
+#
+# print(f"a now: {a}")
+# print(f"b now: {b}")
 
-print(f"b: {b}")
 
-a = np.arange(5, 122)
 
-print(f"a now: {a}")
-print(f"b now: {b}")
 
+
+# t = np.random.randint(1, 11, size=(3, 6))
+# print(f"t: {t}")
+# print(f"n: {t.mean()}")
+# print(f"axis 0: {t.mean(axis=0)}")
+# print(f"axis 1: {t.mean(axis=1)}")
+
+mydict = {'a':0, 'b':1}
+pd.DataFrame.from_dict(data=mydict, orient='index').to_csv('dict_file.csv', header=False)
+nowdict = pd.read_csv('dict_file.csv', header=None, index_col=0, squeeze=True).to_dict()
+print(nowdict)

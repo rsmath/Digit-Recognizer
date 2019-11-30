@@ -3,7 +3,7 @@ This module will update the parameters for gradient descent
 """
 
 
-def update_parameters(parameters, gradients, alpha=0.1):
+def update_parameters(parameters, gradients, alpha=0.01):
     """
     subtracting the gradient from the parameters for gradient descent
     :param parameters: containing all the parameters for all the layers

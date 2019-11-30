@@ -16,7 +16,7 @@ def softmax(Z):
 
     e_Z = np.exp(Z - np.max(Z))
 
-    A = e_Z / e_Z.sum(axis=0, keepdims=True)  # only difference
+    A = e_Z / e_Z.sum(axis=0)  # only difference
 
     assert (A.shape == Z.shape)
 
