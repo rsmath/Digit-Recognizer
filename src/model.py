@@ -3,8 +3,10 @@ The main model file. Here all the different functions will be pieced together to
 If the size of the NN is desired to be changed, it can be done in the layer_dims array.
 """
 
+
+import numpy as np
 from matplotlib import pyplot as plt
-from src.prep_data import train_data, test_data, y
+from src.prep_data import train_data, test_data, y, labels, m
 from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
 from src.update_parameters import update_parameters
@@ -16,6 +18,18 @@ plt.rcParams['figure.figsize'] = (10.0, 10.0)  # set default size of plots
 
 layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
 # highest probability will be the predicted digit
+
+
+def test_accuracy(predictions):
+    """
+    calculates the accuracy of the predictions
+    :param predictions: digit predictions for each example
+    :return: accuracy as a percentage over 100%
+    """
+
+    accuracy = int(np.sum(predictions == labels) * 100 / m)
+
+    return accuracy
 
 
 class VanillaNN:
@@ -100,4 +114,14 @@ class VanillaNN:
         AL, _ = L_model_forward(X_test, parameters)
 
         return AL
+
+
+
+
+
+
+
+
+
+
 

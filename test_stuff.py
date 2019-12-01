@@ -84,11 +84,50 @@ grads = [(1, 2), (4, 5), (5, 6)]
 
 
 # pd.DataFrame.from_dict(data=mydict, orient='index').to_csv('dict_file.csv', header=False)
-nowdict = pd.read_csv('dict_file.csv', header=None, index_col=0, squeeze=True).to_dict()
-for key in nowdict.keys():
-    temp = nowdict[key]
-    nowdict[key] = np.asarray(list(temp))
+# nowdict = pd.read_csv('dict_file.csv', header=None, index_col=0, squeeze=True).to_dict()
+# for key in nowdict.keys():
+#     temp = nowdict[key]
+#     nowdict[key] = np.asarray(list(temp))
+#
+# print(nowdict["W1"].shape)
 
-print(nowdict["W1"].shape)
+
+
+
+# a = np.arange(1, 11).reshape(2, 5)
+#
+# print(f"a: {a}")
+#
+# print(f"a[0][1]: {a[:, 4]}")
+#
+
+
+
+# a = np.array([1, 2, 3, 4, 5])
+# b = np.array([1, 2, 3, 5, 6])
+# acc = np.sum(a == b)
+# print(int(acc * 100 / 5))
+
+
+# d = np.zeros((10, 30))
+#
+# print(f"d: {d}")
+#
+# print(f"d[:, 10]: {np.where(d[:, 10] == 0)}")
+
+
+prac = np.zeros((1, 10))
+
+for i in range(10):
+    print(f"prac[{i}] = {prac[:, i]}")
+
+
+
+
+
+
+
+
+
 
 

@@ -2,9 +2,10 @@
 This module is just to run the model in a clean environment with new data
 """
 
+
 import pickle
-from src.model import VanillaNN
-from src.prep_data import test_data, train_data
+from src.model import VanillaNN, test_accuracy
+from src.prep_data import test_data, train_data, m
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -14,10 +15,27 @@ layers = [784, 30, 30, 10]
 
 model = VanillaNN(layer_dims=layers, iterations=500, learning_rate=0.0075, print_cost=True)
 
+def vector_to_digit(initial_predictions):
+    """
+    converts vectors of length 10 to a single digit where the position is 1
+    :param initial_predictions: matrix of predictions
+    :return: vector of predictions
+    """
+
+    # shape of parameter predictions is (10, 42000)
+
+    pred_updated = np.zeros((1, m))
+
+    for i in range(m):
+        temp_pred = initial_predictions[:, i]
+        pred_updated[:, i] = np.where(temp_pred == np.amax(temp_pred))[0]
+
+    return pred_updated
+
 
 if __name__ == "__main__":
 
-    user = input("\nEnter command (train or test): ")
+    user = input("\nEnter command (train or test or acc (for accuracy)): ")
 
     while user != 'b':
         if user == 'train':
@@ -45,9 +63,22 @@ if __name__ == "__main__":
                 plt.close()
 
             elif choice == 'c':
+                pickle_in = open("costs_place.pickle", "rb")
+                costs = pickle.load(pickle_in)
                 fig = plt.plot(costs)
                 plt.show()
                 plt.close()
+
+        elif user == 'acc': # for calculating accuracy over the training set
+            pickle_in = open("dict.pickle", "rb")
+            parameters = pickle.load(pickle_in)
+
+            temp = model.test(parameters, train_data) # shape (10, 42000)
+            predictions = vector_to_digit(temp) # shape (1, 42000)
+
+            accuracy = test_accuracy(predictions)
+
+            print(f"Accuracy on training set is: {accuracy}%")
 
         user = input("\nEnter command (train or test): ")
 
