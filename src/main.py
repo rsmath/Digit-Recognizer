@@ -35,13 +35,13 @@ def vector_to_digit(initial_predictions):
 
 if __name__ == "__main__":
 
-    user = input("\nEnter command (train or test or acc (for accuracy)): ")
+    user = input("\nEnter command (b (to terminate) or train or test or acc (for accuracy)): ")
 
     while user != 'b':
         if user == 'train':
             parameters, costs = model.train()
             pickle_out = open("dict.pickle", "wb")
-            pickle_cost = open("costs_place.picke", "wb")
+            pickle_cost = open("costs_place.pickle", "wb")
             pickle.dump(costs, pickle_cost)
             pickle.dump(parameters, pickle_out)
             pickle_out.close()
@@ -63,8 +63,8 @@ if __name__ == "__main__":
                 plt.close()
 
             elif choice == 'c':
-                pickle_in = open("costs_place.pickle", "rb")
-                costs = pickle.load(pickle_in)
+                pickle_inc = open("costs_place.pickle", "rb")
+                costs = pickle.load(pickle_inc)
                 fig = plt.plot(costs)
                 plt.show()
                 plt.close()
@@ -80,5 +80,5 @@ if __name__ == "__main__":
 
             print(f"Accuracy on training set is: {accuracy}%")
 
-        user = input("\nEnter command (train or test): ")
+        user = input("\nEnter command (b (to terminate) or train or test or acc (for accuracy)): ")
 
