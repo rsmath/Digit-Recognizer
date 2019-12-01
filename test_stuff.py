@@ -79,7 +79,16 @@ grads = [(1, 2), (4, 5), (5, 6)]
 # print(f"axis 0: {t.mean(axis=0)}")
 # print(f"axis 1: {t.mean(axis=1)}")
 
-mydict = {'a':0, 'b':1}
-pd.DataFrame.from_dict(data=mydict, orient='index').to_csv('dict_file.csv', header=False)
+
+
+
+
+# pd.DataFrame.from_dict(data=mydict, orient='index').to_csv('dict_file.csv', header=False)
 nowdict = pd.read_csv('dict_file.csv', header=None, index_col=0, squeeze=True).to_dict()
-print(nowdict)
+for key in nowdict.keys():
+    temp = nowdict[key]
+    nowdict[key] = np.asarray(list(temp))
+
+print(nowdict["W1"].shape)
+
+

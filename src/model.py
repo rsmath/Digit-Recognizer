@@ -45,7 +45,6 @@ class VanillaNN:
         self.iterations = iterations
         self.learning_rate = learning_rate
         self.print_cost = print_cost
-
         self.costs = []
 
     def train(self, X=train_data, Y=y):
@@ -84,13 +83,16 @@ class VanillaNN:
 
         return self.parameters, costs
 
-    def test(self, parameters, X_test=test_data):
+    def test(self, parameters=None, X_test=test_data):
         """
         computing the predicted digit of an image pixel array
         :param parameters: user inserted
         :param X_test: image pixel array
-        :return: None
+        :return: output probabilities of softmax
         """
+
+        # if parameters is None:
+        #     parameters = self.parameters
 
         if parameters is None:
             parameters = self.parameters
