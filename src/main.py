@@ -50,6 +50,7 @@ if __name__ == "__main__":
             pickle.dump(train_costs, pickle_cost)
             pickle.dump(parameters, pickle_out)
             pickle_out.close()
+            pickle_cost.close()
 
         elif user == 'test':
             pickle_in = open("dict.pickle", "rb")
@@ -88,7 +89,7 @@ if __name__ == "__main__":
             test_accuracy = test_accuracy(test_predictions, ground_truth=labels_test, size=m_test)
 
             print(f"\nAccuracy on training set is: {train_accuracy}%")
-            print(f"Accuracy on test set is: {test_predictions}")
+            print(f"Accuracy on test set is: {test_accuracy}%")
 
         user = input("\nEnter command (b (to terminate) or train or test or c (for train_costs) or acc (for "
                      "train_accuracy)): ")
