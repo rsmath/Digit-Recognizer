@@ -27,3 +27,4 @@ def initialize_parameters(layers):
 
     return parameters
 
+

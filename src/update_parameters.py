@@ -20,3 +20,4 @@ def update_parameters(parameters, gradients, alpha=0.01):
 
     return parameters
 
+

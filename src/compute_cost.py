@@ -22,3 +22,4 @@ def compute_cost(AL, y):
 
     return cost
 
+

@@ -64,7 +64,7 @@ def L_model_backward(AL, caches):
     gradients = []
     L = len(caches) - 1
 
-    gradient, dA_prev = linear_backward(AL, caches[L], 'softmax')
+    gradient, dA_prev = linear_backward(AL, caches[L], 'softmax') # for softmax, AL is required in the backprop
     gradients.append(gradient)
 
     dA = dA_prev
@@ -77,4 +77,5 @@ def L_model_backward(AL, caches):
     gradients = gradients[::-1] # going from first layer to last layer
 
     return gradients
+
 
