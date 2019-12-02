@@ -5,7 +5,7 @@ This module is just to run the model in a clean environment with new data
 
 import pickle
 from src.model import VanillaNN, test_accuracy
-from src.prep_data import test_data, train_data, m, labels_train, labels_test
+from src.prep_data import test_data, train_data, m_train, m_test, labels_train, labels_test
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -13,20 +13,24 @@ import numpy as np
 parameters, train_costs = None, None
 layers = [784, 30, 30, 10]
 
-model = VanillaNN(layer_dims=layers, iterations=800, learning_rate=0.003, print_cost=True)
+model = VanillaNN(layer_dims=layers, iterations=700, learning_rate=0.0025, print_cost=True)
 
-def vector_to_digit(initial_predictions):
+def vector_to_digit(initial_predictions, size=None):
     """
     converts vectors of length 10 to a single digit where the position is 1
+    :param size: number of examples in dataset, either for training or test set
     :param initial_predictions: matrix of predictions
     :return: vector of predictions
     """
 
     # shape of parameter predictions is (10, 32000)
 
-    pred_updated = np.zeros((1, m))
+    if size is None:
+        size = m_train # default is for training set
 
-    for i in range(m):
+    pred_updated = np.zeros((1, size))
+
+    for i in range(size):
         temp_pred = initial_predictions[:, i]
         pred_updated[:, i] = np.where(temp_pred == np.amax(temp_pred))[0]
 
@@ -75,13 +79,13 @@ if __name__ == "__main__":
             parameters = pickle.load(pickle_in)
 
             temp_train = model.test(parameters, train_data) # shape (10, 32000)
-            train_predictions = vector_to_digit(temp_train) # shape (1, 32000)
+            train_predictions = vector_to_digit(temp_train, size=m_train) # shape (1, 32000)
 
             temp_test = model.test(parameters, test_data) # shape (10, 10000)
-            test_predictions = vector_to_digit(temp_test) # shape (1, 10000)
+            test_predictions = vector_to_digit(temp_test, size=m_test) # shape (1, 10000)
 
-            train_accuracy = test_accuracy(train_predictions, ground_truth=labels_train)
-            test_accuracy = test_accuracy(test_predictions, ground_truth=labels_test)
+            train_accuracy = test_accuracy(train_predictions, ground_truth=labels_train, size=m_train)
+            test_accuracy = test_accuracy(test_predictions, ground_truth=labels_test, size=m_test)
 
             print(f"\nAccuracy on training set is: {train_accuracy}%")
             print(f"Accuracy on test set is: {test_predictions}")

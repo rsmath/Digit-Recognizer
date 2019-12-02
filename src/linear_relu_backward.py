@@ -6,7 +6,7 @@ Separate functions will be defined so that any form of input will work
 
 import numpy as np
 from src.equations import softmax_backward, relu_backward
-from src.prep_data import m, y
+from src.prep_data import m_train, y
 
 
 def backward(dZ, caches):
@@ -20,8 +20,8 @@ def backward(dZ, caches):
     linear_cache, _ = caches
     A_prev, W, b = linear_cache
 
-    dW = (1 / m) * np.dot(dZ, np.transpose(A_prev))
-    db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+    dW = (1 / m_train) * np.dot(dZ, np.transpose(A_prev))
+    db = (1 / m_train) * np.sum(dZ, axis=1, keepdims=True)
     dA_prev = np.dot(np.transpose(W), dZ)
 
     assert (dW.shape == W.shape)

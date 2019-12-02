@@ -4,7 +4,7 @@ This module will compute the cost of each iteration of forward prop
 
 
 import numpy as np
-from src.prep_data import m
+from src.prep_data import m_train
 
 
 def compute_cost(AL, y):
@@ -15,7 +15,7 @@ def compute_cost(AL, y):
     :return: cost of the function L
     """
 
-    cost = (-1 / m) * np.sum(y * np.log(AL + 1e-8)) # 1e-8 added to avoid taking log of 0
+    cost = (-1 / m_train) * np.sum(y * np.log(AL + 1e-8)) # 1e-8 added to avoid taking log of 0
     cost = np.squeeze(cost) # turns [[17]] into 17
 
     assert (cost.shape == ())

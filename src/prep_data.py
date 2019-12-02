@@ -25,10 +25,11 @@ test_data = data_original[:, 32000:]  # shape (784, 10000)
 
 labels_test = labels[32000:] # labels for test set
 
-m = len(labels_train)  # number of training examples in training data
+m_train = len(labels_train)  # number of training examples in training data
+m_test = len(labels_test) # number of examples in test set
 
 y = []
-for i in range(m):
+for i in range(m_train):
     temp = np.zeros((10,), dtype=int)
     temp[labels_train[i]] = 1
     y.append(temp)

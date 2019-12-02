@@ -6,7 +6,7 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 
 import numpy as np
 from matplotlib import pyplot as plt
-from src.prep_data import train_data, test_data, y, labels_train, m
+from src.prep_data import train_data, test_data, y, labels_train, m_train
 from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
 from src.update_parameters import update_parameters
@@ -20,9 +20,10 @@ layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output
 # highest probability will be the predicted digit
 
 
-def test_accuracy(predictions, ground_truth=None):
+def test_accuracy(predictions, ground_truth=None, size=None):
     """
     calculates the accuracy of the predictions
+    :param size: size can be passed in, either for training or testing sets
     :param ground_truth: if required, user can pass the ground truth
     :param predictions: digit predictions for each example
     :return: accuracy as a percentage over 100%
@@ -31,7 +32,10 @@ def test_accuracy(predictions, ground_truth=None):
     if ground_truth is None:
         ground_truth = labels_train # default is over the training set
 
-    accuracy = int(np.sum(predictions == ground_truth) * 100 / m)
+    if size is None:
+        size = m_train # default is for training set
+
+    accuracy = int(np.sum(predictions == ground_truth) * 100 / size)
 
     return accuracy
 
