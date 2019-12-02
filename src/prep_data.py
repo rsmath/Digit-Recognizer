@@ -13,15 +13,15 @@ labels = np.asarray(data['label'])  # can be used as y, the true values
 
 data.set_index('label', inplace=True)  # permanently sets label column to be the index
 
-train_data = np.asarray(data)
-train_data = np.transpose(train_data)  # this fixes a small bug, changes shape to (784, 42000)
-train_data = train_data[:, : 32000]  # (784, 32000) since test.csv does not have any labels, 32000 of train is the
+data_original = np.asarray(data)
+data_original = np.transpose(data_original)  # this fixes a small bug, changes shape to (784, 42000)
+train_data = data_original[:, : 32000]  # (784, 32000) since test.csv does not have any labels, 32000 of train is the
 # training set, remaining is test set
 
 labels_train = labels[: 32000] # labels for training set
 
 
-test_data = train_data[:, 32000:]  # shape (784, 10000)
+test_data = data_original[:, 32000:]  # shape (784, 10000)
 
 labels_test = labels[32000:] # labels for test set
 
