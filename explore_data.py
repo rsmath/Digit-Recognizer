@@ -37,14 +37,3 @@ for i in range(0, 10):
 plt.savefig('digits.png')
 
 
-
-
-
-
-
-
-
-
-
-
-
