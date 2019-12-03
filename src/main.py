@@ -18,7 +18,7 @@ model = VanillaNN(layer_dims=layers, iterations=700, learning_rate=0.0025, print
 def vector_to_digit(initial_predictions, size=None):
     """
     converts vectors of length 10 to a single digit where the position is 1
-    :param size: number of examples in dataset, either for training or test set
+    :param size: number of examples in data set, either for training or test set
     :param initial_predictions: matrix of predictions
     :return: vector of predictions
     """
@@ -86,10 +86,10 @@ if __name__ == "__main__":
             test_predictions = vector_to_digit(temp_test, size=m_test) # shape (1, 10000)
 
             train_accuracy = test_accuracy(train_predictions, ground_truth=labels_train, size=m_train)
-            test_accuracy = test_accuracy(test_predictions, ground_truth=labels_test, size=m_test)
+            tests_accuracy = test_accuracy(test_predictions, ground_truth=labels_test, size=m_test)
 
             print(f"\nAccuracy on training set is: {train_accuracy}%")
-            print(f"Accuracy on test set is: {test_accuracy}%")
+            print(f"Accuracy on test set is: {tests_accuracy}%")
 
         user = input("\nEnter command (b (to terminate) or train or test or c (for train_costs) or acc (for "
                      "train_accuracy)): ")
