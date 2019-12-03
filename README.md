@@ -3,7 +3,11 @@
 
 ## PROJECT DESCRIPTION
 
+### Updates
 
+As of December 3rd, 2019, I have finished the purpose of this project. I wanted to implement a Vanilla Neural Network with basic Python, Numpy, and Pandas.
+
+I am __*not*__ going to be adding regularization or other kinds of tuning to this neural network.
 
 ### Introduction
 
@@ -28,7 +32,45 @@ I will be making my Vanilla NN in Python3 using the following libraries      **_
 
 The neural network will be a L-layer network. This means that I will be testing the best efficiency using different number of layers (having different number of neurons).
 
+The architecture (layer dimensions) can be changed by the user in the [main.py](../src/main.py) module in the layers list.
 
+The parameters that are initialized in the model are -:
+
+- parameters = None 
+- layer_dims = None 
+- iterations = 3000
+- learning_rate = 0.075
+- print_cost = False
+
+All these variables can be passed in by the user, or left empty if the user wishes to use the values set in this project.
+
+(*Note it is highly recommended that the iterations value is passed to be a number under 1000, as it takes really long for the model to train given that libraries such as pytorch and tensorflow are not used. The set value of 3000 was initially set as it was in the deep learning course.*)
+
+
+
+To initialize a model, download this repository, open an empty python module (in the same directory as the repository), and import as follows:
+
+
+```python
+from src.model import VanillaNN
+import numpy as np
+
+layers = [784, 30, 30, 10] # Do not change the first and the last values. 784 is the length of each image's pixel features and the output layer has 10 
+# probability values
+
+model = VanillaNN(layer_dims=layers, iterations=700, learning_rate=0.0025, print_cost=True)
+# you can set these variables as per your own liking
+
+# to train, just run the following line
+parameters, train_costs = model.train()
+
+# parameters can now be used to test any new image
+
+# to test the digit of a new image
+output = model.test(parameters, X_test) # where X_test is your image of length 784 pixel values
+print(f"\nOutput probabilities are: \t\n{output}\n")
+digit = np.where(output == np.amax(output))[0][0]
+```
 
 -------
 
@@ -42,8 +84,17 @@ Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c
 
 ### Exploring the training data
 
-Below is an image of different examples of digits given in the training data. Please refer to the above Jupyter notebook to see how I obtained this image.
 ![Digits from 0-9](digits.png?raw=true "Digits from 0-9")
+
+-------
+
+### Results
+
+I had to split the MNIST train set into 32000 (train) and 10000 (test) values since the actual test data did not have any ground truth labels.
+
+I got 91% accuracy in both the training and test sets. Considering my model did not have any sort of regularization (L2 or dropout),
+the acquired accuracy is pretty impressive. I hope to improve upon this project in the future.
+
 -------
 
 ### Contact
