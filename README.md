@@ -32,7 +32,7 @@ I will be making my Vanilla NN in Python3 using the following libraries      **_
 
 The neural network will be a L-layer network. This means that I will be testing the best efficiency using different number of layers (having different number of neurons).
 
-The architecture (layer dimensions) can be changed by the user in the [main.py](../src/main.py) module in the layers list.
+The architecture (layer dimensions) can be changed by the user in the [main.py](../master/src/main.py) module in the layers list.
 
 The parameters that are initialized in the model are -:
 
