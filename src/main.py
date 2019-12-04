@@ -40,7 +40,7 @@ def vector_to_digit(initial_predictions, size=None):
 if __name__ == "__main__":
 
     user = input("\nEnter command (b (to terminate) or train or test or c (for train_costs) or acc (for "
-                 "train_accuracy)): ")
+                 "train and test accuracies)): ")
 
     while user != 'b':
         if user == 'train':
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         elif user == 'test':
             pickle_in = open("dict.pickle", "rb")
             parameters = pickle.load(pickle_in)
-            X_test = test_data[:, np.random.randint(10000)].reshape(784, 1)  # random image
+            X_test = test_data[:, np.random.randint(m_test)].reshape(784, 1)  # random image
             output = model.test(parameters, X_test)
             print(f"\nOutput probabilities are: \t\n{output}\n")
             digit = np.where(output == np.amax(output))[0][0]
@@ -92,6 +92,6 @@ if __name__ == "__main__":
             print(f"Accuracy on test set is: {tests_accuracy}%")
 
         user = input("\nEnter command (b (to terminate) or train or test or c (for train_costs) or acc (for "
-                     "train_accuracy)): ")
+                     "train and test accuracies)): ")
 
 
