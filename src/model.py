@@ -35,7 +35,7 @@ def test_accuracy(predictions, ground_truth=None, size=None):
     if size is None:
         size = m_train # default is for training set
 
-    accuracy = int(np.sum(predictions == ground_truth) * 100 / size)
+    accuracy = round(np.sum(predictions == ground_truth) * 100 / size, 2)
 
     return accuracy
 
