@@ -15,18 +15,28 @@ data.set_index('label', inplace=True)  # permanently sets label column to be the
 
 data_original = np.asarray(data)
 data_original = np.transpose(data_original)  # this fixes a small bug, changes shape to (784, 42000)
-train_data = data_original[:, : 29400]  # (784, 29400) since test.csv does not have any labels, 29400 of train is the
-# training set, remaining is test set
 
-labels_train = labels[: 29400] # labels for training set
+train_data = data_original[:, : 30000]  # (784, 30000) training data
+labels_train = labels[: 30000] # labels for training set
 
+cv_data = data_original[:, 30000:35000] # validation set will be used for plotting CV costs
+labels_cv = labels[30000:35000] # labels for validation set
 
-test_data = data_original[:, 29400:]  # shape (784, 12600)
-
-labels_test = labels[29400:] # labels for test set
+test_data = data_original[:, 35000:]  # shape (784, 7000)
+labels_test = labels[35000:] # labels for test set
 
 m_train = len(labels_train)  # number of training examples in training data
+m_cv = len(labels_cv) # number of examples in validation set
 m_test = len(labels_test) # number of examples in test set
+
+y_cv = []
+for i in range(m_cv):
+    temp = np.zeros((10,), dtype=int)
+    temp[labels_cv[i]] = 1
+    y_cv.append(temp)
+
+y_cv = np.asarray(y_cv)
+y_cv = np.transpose(y_cv) # ground truth for validation test shape (10, 5000)
 
 y = []
 for i in range(m_train):
@@ -35,10 +45,6 @@ for i in range(m_train):
     y.append(temp)
 
 y = np.asarray(y)  # shape (29400, 10), a 1 for each label digit's position in an empty (10,) zeros array
-y = np.transpose(y)  # fixes a bug and changes shape of y to (10, 29400)
+y = np.transpose(y)  # fixes a bug and changes shape of y to (10, 30000)
 
-'''
-FOR NOW THERE WILL BE NO CROSS VALIDATION TEST. AFTER A PRELIMINARY MODEL HAS BEEN MADE AND TESTED, 
-THEN A CROSS VALIDATION TEST WILL BE USED TO OPTIMIZE THE REGULARIZATION PARAMETER (THERE IS NO
-REGULARIZATION RIGHT NOW EITHER)
-'''
+

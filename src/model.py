@@ -6,7 +6,7 @@ If the size of the NN is desired to be changed, it can be done in the layer_dims
 
 import numpy as np
 from matplotlib import pyplot as plt
-from src.prep_data import train_data, test_data, y, labels_train, m_train
+from src.prep_data import train_data, test_data, cv_data, y, y_cv, labels_train, m_train
 from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
 from src.update_parameters import update_parameters
@@ -68,6 +68,7 @@ class VanillaNN:
         self.learning_rate = learning_rate
         self.print_cost = print_cost
         self.costs = []
+        self.cv_costs = []
 
     def train(self, X=train_data, Y=y):
         """
@@ -77,8 +78,6 @@ class VanillaNN:
         :return: None
         """
 
-        costs = []
-
         # first the parameters need to be initialized
         self.parameters = initialize_parameters(self.layer_dims)
 
@@ -87,10 +86,14 @@ class VanillaNN:
 
             # forward propagation run
             AL, caches = L_model_forward(X, self.parameters)
+            cv_AL, _ = L_model_forward(cv_data, self.parameters) # validation test
 
             # cost is stored
             cost = compute_cost(AL, Y)
+            cv_cost = compute_cost(cv_AL, y_cv)
+
             self.costs.append(cost)
+            self.cv_costs.append(cv_cost)
 
             # back propagation will be run
             gradients = L_model_backward(AL, caches) # gradients
@@ -100,10 +103,10 @@ class VanillaNN:
 
             # printing the cost every 100 iterations
             if (i == 0 or i % 10 == 0) and self.print_cost:
-                costs.append(cost)
+                self.costs.append(cost)
                 print(f"Cost for iteration # {i}:  {cost}")
 
-        return self.parameters, costs
+        return self.parameters, self.costs, self.cv_costs
 
     def test(self, parameters=None, X_test=test_data):
         """

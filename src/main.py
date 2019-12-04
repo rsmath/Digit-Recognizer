@@ -44,13 +44,16 @@ if __name__ == "__main__":
 
     while user != 'b':
         if user == 'train':
-            parameters, train_costs = model.train(X=train_data)
+            parameters, train_costs, cv_costs = model.train(X=train_data)
             pickle_out = open("dict.pickle", "wb")
             pickle_cost = open("costs_place.pickle", "wb")
+            pickle_cvcosts = open("cv_costs.pickle", "wb")
+            pickle.dump(cv_costs, pickle_cvcosts)
             pickle.dump(train_costs, pickle_cost)
             pickle.dump(parameters, pickle_out)
             pickle_out.close()
             pickle_cost.close()
+            pickle_cvcosts.close()
 
         elif user == 'test':
             pickle_in = open("dict.pickle", "rb")
@@ -67,9 +70,16 @@ if __name__ == "__main__":
 
         elif user == 'c':
             pickle_inc = open("costs_place.pickle", "rb")
+            pickle_cv = open("cv_costs.pickle", "rb")
+
             train_costs = pickle.load(pickle_inc)
-            fig1 = plt.plot(train_costs)
-            plt.title("Cost as the model trains")
+            cv_costs = pickle.load(pickle_cv)
+
+            plt.plot(train_costs, label="train")
+            plt.plot(cv_costs, label="validation")
+            plt.legend(loc="upper right")
+
+            plt.title("Cost (train and validation) as the model trains")
             plt.xlabel('Iterations')
             plt.ylabel("Cost")
             plt.show()
