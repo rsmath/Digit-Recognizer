@@ -117,17 +117,96 @@ grads = [(1, 2), (4, 5), (5, 6)]
 
 
 prac = np.zeros((1, 10))
-
-for i in range(10):
-    print(f"prac[{i}] = {prac[:, i]}")
-
-
-
-
-
+#
+# for i in range(10):
+#     print(f"prac[{i}] = {prac[:, i]}")
+#
+#
+#
 
 
+import PIL
+
+# from PIL import Image
+# # load the image
+# image = Image.open('../digit3.png')
+# # summarize some details about the image
+# gs_image = image.convert(mode='L')
+# # save in jpeg format
+# gs_image.save('opera_house_grayscale.jpg')
+# # load the image again and show it
+# image2 = Image.open('opera_house_grayscale.jpg')
+# # show the image
+# # image2.show()
+#
+# image3 = image2.resize((28, 28))
+# image3.show()
+# # report the size of the thumbnail
+# print(type(image3))
+#
+#
+# from PIL import Image, ImageFilter
+#
+#
+#
+# def imageprepare(argv):
+#     """
+#     This function returns the pixel values.
+#     The imput is a png file location.
+#     """
+#     im = Image.open(argv).convert('L')
+#     width = float(im.size[0])
+#     height = float(im.size[1])
+#     newImage = Image.new('L', (28, 28), (255))  # creates white canvas of 28x28 pixels
+#
+#     if width > height:  # check which dimension is bigger
+#         # Width is bigger. Width becomes 20 pixels.
+#         nheight = int(round((20.0 / width * height), 0))  # resize height according to ratio width
+#         if (nheight == 0):  # rare case but minimum is 1 pixel
+#             nheight = 1
+#             # resize and sharpen
+#         img = im.resize((20, nheight), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
+#         wtop = int(round(((28 - nheight) / 2), 0))  # calculate horizontal position
+#         newImage.paste(img, (4, wtop))  # paste resized image on white canvas
+#     else:
+#         # Height is bigger. Heigth becomes 20 pixels.
+#         nwidth = int(round((20.0 / height * width), 0))  # resize width according to ratio height
+#         if (nwidth == 0):  # rare case but minimum is 1 pixel
+#             nwidth = 1
+#             # resize and sharpen
+#         img = im.resize((nwidth, 20), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
+#         wleft = int(round(((28 - nwidth) / 2), 0))  # caculate vertical pozition
+#         newImage.paste(img, (wleft, 4))  # paste resized image on white canvas
+#
+#     # newImage.save("sample.png
+#
+#     tv = list(newImage.getdata())  # get pixel values
+#
+#     # normalize pixels to 0 and 1. 0 is pure white, 1 is pure black.
+#     tva = [(255 - x) * 1.0 / 255.0 for x in tv]
+#     # print(tva)
+#     return tva
+#
+# image3=np.asarray(imageprepare('../digit3.png')).reshape(784, 1)#file path here
+# # print(len(image3))# mnist IMAGES are 28x28=784 pixels
 
 
+import pickle
+gd_inc = open("costs_gd.pickle", "rb")
+gd_cv = open("cv_gd.pickle", "rb")
 
+gd_costs = pickle.load(gd_inc)
+gd_cv_costs = pickle.load(gd_cv)
+
+pickle_inc = open("costs_place.pickle", "rb")
+pickle_cv = open("cv_costs.pickle", "rb")
+
+train_costs = pickle.load(pickle_inc)
+cv_costs = pickle.load(pickle_cv)
+
+plt.plot(train_costs, label="Adam train")
+plt.plot(cv_costs, label="Adam validation")
+plt.plot(gd_costs)
+plt.plot(gd_cv_costs)
+plt.legend(loc="upper right")
 

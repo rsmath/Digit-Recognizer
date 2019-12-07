@@ -3,20 +3,21 @@ The main model file. Here all the different functions will be pieced together to
 If the size of the NN is desired to be changed, it can be done in the layer_dims array.
 """
 
-
 import numpy as np
 from matplotlib import pyplot as plt
 from src.prep_data import train_data, test_data, cv_data, y, y_cv, labels_train, m_train
 from src.initialize_parameters import initialize_parameters
 from src.compute_cost import compute_cost
-from src.update_parameters import update_parameters
+from src.update_parameters import update_adam_parameters, initialize_adam, update_gd_parameters
 from src.linear_relu_forward import L_model_forward
 from src.linear_relu_backward import L_model_backward
 
 
-plt.rcParams['figure.figsize'] = (10.0, 10.0)  # set default size of plots
+plt.rcParams['figure.figsize'] = (10.0, 7.0)  # set default size of plots
 
 layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
+
+
 # highest probability will be the predicted digit
 
 
@@ -30,10 +31,10 @@ def test_accuracy(predictions, ground_truth=None, size=None):
     """
 
     if ground_truth is None:
-        ground_truth = labels_train # default is over the training set
+        ground_truth = labels_train  # default is over the training set
 
     if size is None:
-        size = m_train # default is for training set
+        size = m_train  # default is for training set
 
     accuracy = round(np.sum(predictions == ground_truth) * 100 / size, 2)
 
@@ -69,10 +70,12 @@ class VanillaNN:
         self.print_cost = print_cost
         self.costs = []
         self.cv_costs = []
+        self.v, self.s = None, None
 
-    def train(self, X=train_data, Y=y):
+    def train(self, X=train_data, Y=y, technique="adam"):
         """
         this is the most important function. Here, all the helper functions will be called and model will be trained
+        :param technique: optimization algorithm (adam or gd)
         :param Y: label values of the images
         :param X: set of all the images (pixel arrays), in order to train this supervised model
         :return: None
@@ -80,13 +83,14 @@ class VanillaNN:
 
         # first the parameters need to be initialized
         self.parameters = initialize_parameters(self.layer_dims)
+        self.v, self.s = initialize_adam(self.parameters)
 
         # now for each cycle of iterations
         for i in range(1, self.iterations + 1):
 
             # forward propagation run
             AL, caches = L_model_forward(X, self.parameters)
-            cv_AL, _ = L_model_forward(cv_data, self.parameters) # validation test
+            cv_AL, _ = L_model_forward(cv_data, self.parameters)  # validation test
 
             # cost is stored
             cost = compute_cost(AL, Y)
@@ -96,10 +100,14 @@ class VanillaNN:
             self.cv_costs.append(cv_cost)
 
             # back propagation will be run
-            gradients = L_model_backward(AL, caches) # gradients
+            gradients = L_model_backward(AL, caches)  # gradients
 
-            # parameters/parameters will be updated
-            self.parameters = update_parameters(self.parameters, gradients, self.learning_rate)
+            # parameters will be updated
+            if technique == 'adam':
+                self.parameters, self.v, self.s = update_adam_parameters(self.parameters, gradients, self.v, self.s, i,
+                                                                         self.learning_rate)
+            elif technique == 'gd':
+                self.parameters = update_gd_parameters(self.parameters, gradients, self.learning_rate)
 
             # printing the cost every 100 iterations
             if (i == 0 or i % 10 == 0) and self.print_cost:
@@ -122,5 +130,3 @@ class VanillaNN:
         AL, _ = L_model_forward(X_test, parameters)
 
         return AL
-
-
