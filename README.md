@@ -1,4 +1,4 @@
-# DIGIT RECOGNIZER
+# DIGIT RECOGNIZER [![HitCount](http://hits.dwyl.io/ramanshsharma2806/Digit-Recognizer.svg)](http://hits.dwyl.io/ramanshsharma2806/Digit-Recognizer)
 
 
 ## PROJECT DESCRIPTION
