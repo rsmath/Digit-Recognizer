@@ -2,6 +2,7 @@
 This module will update the parameters for gradient descent (adam or otherwise)
 """
 
+
 import numpy as np
 
 
@@ -26,8 +27,16 @@ def initialize_adam(parameters):
 def update_adam_parameters(parameters, gradients, v, s, t, alpha=0.01):
     """
     updating the parameters with adam optimization
+    :param parameters: passed in parameters
+    :param gradients: derivatives of parameters with respect to cost
+    :param v: momentum estimation velocity
+    :param s: RMSProp estimation
+    :param t: batch
+    :param alpha: learning rate
+    :return: parameters, v, and s
     """
 
+    # predefined constants
     beta1 = 0.9
     beta2 = 0.999
     epsilon = 1e-8
@@ -63,7 +72,7 @@ def update_gd_parameters(parameters, gradients, alpha=0.01):
     :param parameters: containing all the parameters for all the layers
     :param gradients: containing all the gradients for all the layers
     :param alpha: learning rate
-    :return:
+    :return: parameters
     """
 
     L = len(parameters) // 2

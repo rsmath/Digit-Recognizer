@@ -18,9 +18,6 @@ plt.rcParams['figure.figsize'] = (10.0, 7.0)  # set default size of plots
 layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
 
 
-# highest probability will be the predicted digit
-
-
 def test_accuracy(predictions, ground_truth=None, size=None):
     """
     calculates the accuracy of the predictions
@@ -130,3 +127,5 @@ class VanillaNN:
         AL, _ = L_model_forward(X_test, parameters)
 
         return AL
+
+
