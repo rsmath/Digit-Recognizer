@@ -19,7 +19,8 @@ def initialize_parameters(layers):
     L = len(layers)
 
     for i in range(1, L):
-        parameters['W' + str(i)] = np.random.randn(layers[i], layers[i - 1]) * 0.01
+        # He initialization
+        parameters['W' + str(i)] = np.random.randn(layers[i], layers[i - 1]) * np.sqrt(2 / layers[i - 1])
         parameters['b' + str(i)] = np.zeros((layers[i], 1))
 
         assert (parameters['W' + str(i)].shape == (layers[i], layers[i - 1]))
