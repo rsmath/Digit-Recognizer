@@ -12,11 +12,15 @@ import time
 
 
 parameters, train_costs = None, None
+
 layers = [784, 30, 30, 10]
 
-epochs = 300
+epochs = 15
 
-model = VanillaNN(layer_dims=layers, iterations=epochs, learning_rate=0.0025, print_cost=True)
+batch_size = 1024
+
+model = VanillaNN(layer_dims=layers, iterations=epochs, learning_rate=0.0025, mini_batch_size=batch_size,
+                  print_cost=True)
 
 
 def vector_to_digit(initial_predictions, size=None):
@@ -51,15 +55,31 @@ command_message = "\nList of commands are:" \
                   "\ntest:\tto test a new random image from the test set and classify it" \
                   "\ncommands:\tto print this command list\n\n"
 
+print(command_message)
 
 if __name__ == "__main__":
 
-    user = input(f"{command_message}Enter command: ")
+    user = input("Enter command: ")
 
     while user != 'e':
         if user == 'train adam':
-            start = time.process_time()
+            start = time.time()
             parameters, train_costs, cv_costs = model.train(X=train_data, technique='adam')
+            end = time.time()
+            print(f"\nTime taken for {epochs} epochs: {end - start} seconds \n")
+            pickle_out = open("dict.pickle", "wb")
+            pickle_cost = open("costs_place.pickle", "wb")
+            pickle_cvcosts = open("cv_costs.pickle", "wb")
+            pickle.dump(cv_costs, pickle_cvcosts)
+            pickle.dump(train_costs, pickle_cost)
+            pickle.dump(parameters, pickle_out)
+            pickle_out.close()
+            pickle_cost.close()
+            pickle_cvcosts.close()
+
+        elif user == 'train gd':
+            start = time.process_time()
+            parameters, train_costs, cv_costs = model.train(X=train_data, technique='gd')
             print(f"\nTime taken for {epochs} epochs: {time.process_time() - start} seconds \n")
             pickle_out = open("dict.pickle", "wb")
             pickle_cost = open("costs_place.pickle", "wb")

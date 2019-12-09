@@ -15,7 +15,7 @@ from src.linear_relu_backward import L_model_backward
 
 plt.rcParams['figure.figsize'] = (10.0, 7.0)  # set default size of plots
 
-layer_dimensions = [784, 10, 5, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
+layer_dimensions = [784, 30, 30, 10]  # 3 layer model, 3rd layer having 10 output units which will be rounded off and
 
 
 def test_accuracy(predictions, ground_truth=None, size=None):
@@ -38,17 +38,52 @@ def test_accuracy(predictions, ground_truth=None, size=None):
     return accuracy
 
 
+def make_batches(X_data, y_data, batch_size=512):
+    """
+    returns a list of batches of size passed in
+    :param X_data: x data passed in
+    :param y_data: y data passed in
+    :param batch_size: batch size
+    :return: list of batches
+    """
+
+    total = X_data.shape[1] # number of total examples
+
+    permutation = np.random.permutation(total) # needs to be same for both x and y
+
+    shuffled_x = X_data[:, permutation]
+    shuffled_y = y_data[:, permutation].reshape(10, total)
+
+    whole_batches = total // batch_size  # considering data's second dimension contains all examples
+    batches = []
+
+    for i in range(whole_batches):
+        curr_x = shuffled_x[:, i * batch_size: (i + 1) * batch_size]
+        curr_y = shuffled_y[:, i * batch_size: (i + 1) * batch_size]
+        batch = (curr_x, curr_y)
+        batches.append(batch)
+
+    if total % 2 != 0:
+        curr_x = shuffled_x[:, whole_batches * batch_size:]
+        curr_y = shuffled_y[:, whole_batches * batch_size:]
+        batch = (curr_x, curr_y)
+        batches.append(batch)
+
+    return batches
+
+
 class VanillaNN:
     """
     The model object
     This will have the train and test functions
     """
 
-    def __init__(self, parameters=None, layer_dims=None, iterations=3000, learning_rate=0.075,
+    def __init__(self, parameters=None, layer_dims=None, iterations=3000, learning_rate=0.075, mini_batch_size=512,
                  print_cost=False):
         """
         initiating the model object
         :param parameters: if passed by user (saw while testing)
+        :param mini_batch_size: mini batch size passed in by the user
         :param layer_dims: network architecture
         :param iterations: gradient descent runs for these many iterations
         :param learning_rate: alpha in gradient descent
@@ -64,6 +99,7 @@ class VanillaNN:
         self.parameters = parameters
         self.iterations = iterations
         self.learning_rate = learning_rate
+        self.mini_batch_size = mini_batch_size
         self.print_cost = print_cost
         self.costs = []
         self.cv_costs = []
@@ -82,34 +118,52 @@ class VanillaNN:
         self.parameters = initialize_parameters(self.layer_dims)
         self.v, self.s = initialize_adam(self.parameters)
 
+        t = 0 # initializing for adam
+
         # now for each cycle of iterations
         for i in range(1, self.iterations + 1):
 
-            # forward propagation run
-            AL, caches = L_model_forward(X, self.parameters)
-            cv_AL, _ = L_model_forward(cv_data, self.parameters)  # validation test
+            # make new batches
+            batches = make_batches(X, Y, batch_size=self.mini_batch_size) # for training data
+            curr_cost, curr_cv_cost = 0, 0
 
-            # cost is stored
-            cost = compute_cost(AL, Y)
-            cv_cost = compute_cost(cv_AL, y_cv)
+            for batch in batches:
 
-            self.costs.append(cost)
-            self.cv_costs.append(cv_cost)
+                curr_X, curr_Y = batch
 
-            # back propagation will be run
-            gradients = L_model_backward(AL, caches)  # gradients
+                # forward propagation run
+                AL, caches = L_model_forward(curr_X, self.parameters)
+                cv_AL, _ = L_model_forward(cv_data, self.parameters)  # validation test
 
-            # parameters will be updated
-            if technique == 'adam':
-                self.parameters, self.v, self.s = update_adam_parameters(self.parameters, gradients, self.v, self.s, i,
-                                                                         self.learning_rate)
-            elif technique == 'gd':
-                self.parameters = update_gd_parameters(self.parameters, gradients, self.learning_rate)
+                # cost is stored
+                cost = compute_cost(AL, curr_Y)
+                curr_cost += cost
+                cv_cost = compute_cost(cv_AL, y_cv)
+                curr_cv_cost += cv_cost
+
+                # back propagation will be run
+                gradients = L_model_backward(AL, caches, Y_param=curr_Y)  # gradients
+
+                # parameters will be updated
+                if technique == 'adam':
+                    t += 1
+                    self.parameters, self.v, self.s = update_adam_parameters(self.parameters, gradients, self.v,
+                                                                             self.s, t, self.learning_rate)
+
+                elif technique == 'gd':
+                    self.parameters = update_gd_parameters(self.parameters, gradients, self.learning_rate)
+
+            t = 0 # resetting the adam counter
+
+            curr_cost = curr_cost / m_train # average cost
+            curr_cv_cost = curr_cv_cost / len(y_cv) # average cost
+
+            self.costs.append(curr_cost)
+            self.cv_costs.append(curr_cv_cost)
 
             # printing the cost every 100 iterations
             if (i == 0 or i % 10 == 0) and self.print_cost:
-                self.costs.append(cost)
-                print(f"Cost for iteration # {i}:  {cost}")
+                print(f"Cost for iteration # {i}:  {curr_cost}")
 
         return self.parameters, self.costs, self.cv_costs
 
@@ -127,5 +181,3 @@ class VanillaNN:
         AL, _ = L_model_forward(X_test, parameters)
 
         return AL
-
-

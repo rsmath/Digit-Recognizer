@@ -192,21 +192,125 @@ import PIL
 
 
 import pickle
-gd_inc = open("costs_gd.pickle", "rb")
-gd_cv = open("cv_gd.pickle", "rb")
+# gd_inc = open("costs_gd.pickle", "rb")
+# gd_cv = open("cv_gd.pickle", "rb")
+#
+# gd_costs = pickle.load(gd_inc)
+# gd_cv_costs = pickle.load(gd_cv)
+#
+# pickle_inc = open("costs_place.pickle", "rb")
+# pickle_cv = open("cv_costs.pickle", "rb")
+#
+# train_costs = pickle.load(pickle_inc)
+# cv_costs = pickle.load(pickle_cv)
+#
+# plt.plot(train_costs, label="Adam train")
+# plt.plot(cv_costs, label="Adam validation")
+# plt.plot(gd_costs)
+# plt.plot(gd_cv_costs)
+# plt.legend(loc="upper right")
+#
 
-gd_costs = pickle.load(gd_inc)
-gd_cv_costs = pickle.load(gd_cv)
 
-pickle_inc = open("costs_place.pickle", "rb")
-pickle_cv = open("cv_costs.pickle", "rb")
+# def make_batches(X, y, batch_size):
+#     """
+#     returns a list of batches of size passed in
+#     :param data: training data passed in
+#     :param batch_size: batch size
+#     :return: list of batches
+#     """
+#
+#     total = X.shape[1]
+#
+#     permutation = np.random.permutation(total)
+#
+#     shuffled_x = X[:, permutation]
+#     shuffled_y = y[:, permutation].reshape(1, total)
+#
+#     whole_batches = total // batch_size  # considering data's second dimension contains all examples
+#     batches = []
+#
+#     for i in range(whole_batches):
+#         curr_x = X[:, i * batch_size: (i + 1) * batch_size]
+#         curr_y = y[:, i * batch_size: (i + 1) * batch_size]
+#         batch = (curr_x, curr_y)
+#         batches.append(batch)
+#
+#     if total % 2 != 0:
+#         curr_x = X[:, whole_batches * batch_size:]
+#         curr_y = y[:, whole_batches * batch_size]
+#         batch = (curr_x, curr_y)
+#         batches.append(batch)
+#
+#     return batches
+#
+#
+# datas = np.arange(100).reshape(2, 50)
+# y = np.arange(50).reshape(1, 50)
+#
+# print(len(make_batches(datas, y, 10)[0]))
+#
+#
+#
 
-train_costs = pickle.load(pickle_inc)
-cv_costs = pickle.load(pickle_cv)
 
-plt.plot(train_costs, label="Adam train")
-plt.plot(cv_costs, label="Adam validation")
-plt.plot(gd_costs)
-plt.plot(gd_cv_costs)
-plt.legend(loc="upper right")
+
+
+
+
+
+import time
+
+
+
+
+start = time.time()
+
+for i in range(3):
+    time.sleep(1)
+
+end = time.time()
+
+print(end-start)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

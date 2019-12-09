@@ -30,9 +30,10 @@ def backward(dZ, caches):
 
     return (dW, db), dA_prev
 
-def linear_backward(input, caches, func):
+def linear_backward(input, caches, func, Y=y):
     """
     computing the entire backward prop gradients based on the activation function
+    :param Y: needs to be passed in to avoid mismatch in mini batch gradient descent
     :param input: can be dA (for relu) or AL (for softmax)
     :param caches: packed tuple (linear_cache, activated cache)
     :param func: activation function (relu or softmax)
@@ -44,7 +45,7 @@ def linear_backward(input, caches, func):
     Z = activated_cache
 
     if func == 'softmax':
-        dZ = softmax_backward(input, Z, y) # implementation for softmax_backward handles the dZ calculation
+        dZ = softmax_backward(input, Z, Y) # implementation for softmax_backward handles the dZ calculation
         gradient, dA_prev = backward(dZ, caches)
 
     elif func == 'relu':
@@ -53,9 +54,10 @@ def linear_backward(input, caches, func):
 
     return gradient, dA_prev
 
-def L_model_backward(AL, caches):
+def L_model_backward(AL, caches, Y_param=y):
     """
     computing the gradients for all the layers
+    :param Y_param: needs to be passed in to avoid mismatch in min batch gradient descent
     :param AL: output value of final layer after softmax activation
     :param caches: accumulated caches of all the layers
     :return: accumulated gradients of all the layers to be used by update_parameters
@@ -64,7 +66,7 @@ def L_model_backward(AL, caches):
     gradients = []
     L = len(caches) - 1
 
-    gradient, dA_prev = linear_backward(AL, caches[L], 'softmax') # for softmax, AL is required in the backprop
+    gradient, dA_prev = linear_backward(AL, caches[L], 'softmax', Y=Y_param) # for softmax, AL is needed in the backprop
     gradients.append(gradient)
 
     dA = dA_prev
