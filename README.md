@@ -40,11 +40,14 @@ The parameters that are initialized in the model are -:
 - layer_dims = None 
 - iterations = 3000
 - learning_rate = 0.075
+- mini_batch_size = 1024
 - print_cost = False
 
 All these variables can be passed in by the user, or left empty if the user wishes to use the values set in this project.
 
-(*Note it is highly recommended that the iterations value is passed to be a number under 1000, as it takes really long for the model to train given that libraries such as pytorch and tensorflow are not used. The set value of 3000 was initially set as it was in the deep learning course.*)
+**I have implemented mini batch gradient descent and Adam Optimization algorithm in this project. Therefore, in just under 20 iterations, the model learns wonderfully.**
+
+(*Note it is highly recommended that the iterations value is passed to be a number under 50, as it takes really long for the model to train given that libraries such as pytorch and tensorflow are not used. The set value of 3000 was initially set as it was in the deep learning course.*)
 
 
 
@@ -92,8 +95,10 @@ Link - [https://www.kaggle.com/c/digit-recognizer/data](https://www.kaggle.com/c
 
 I had to split the MNIST train set into 32000 (train) and 10000 (test) values since the actual test data did not have any ground truth labels.
 
-I got 91% accuracy in both the training and test sets. Considering my model did not have any sort of regularization (L2 or dropout),
-the acquired accuracy is pretty impressive. I hope to improve upon this project in the future.
+Since I recently (*on December 9th*) applied [Adam optimization algorithm][4] and mini batch gradient descent to my model, I have achieved better results.
+
+I achieved **98%** accuracy on the training set and **95%** accuracy on the test set. I do not see the model overfitting as of now, so I will have to further assess where exactly I might be able to improve the model in terms of accuracy.
+
 
 -------
 
@@ -106,3 +111,4 @@ If you have any concern or suggestion regarding this project, feel free to email
 [1]: https://www.coursera.org/learn/neural-networks-deep-learning/
 [2]: https://www.coursera.org/specializations/deep-learning?
 [3]: https://www.kaggle.com/
+[4]: https://arxiv.org/pdf/1412.6980.pdf
