@@ -5,7 +5,7 @@
 
 ### Updates
 
-As of December 3rd, 2019, I have finished the purpose of this project. I wanted to implement a Vanilla Neural Network with basic Python, Numpy, and Pandas.
+As of December 8th, 2019, I have finished the purpose of this project. I wanted to implement a Vanilla Neural Network with basic Python, Numpy, and Pandas. I have even added mini-batch gradient descent and Adam optimization algorithm.
 
 I am __*not*__ going to be adding regularization or other kinds of tuning to this neural network.
 
