@@ -5,7 +5,7 @@
 
 ### Updates
 
-As of December 3rd, 2019, I have finished the purpose of this project. I wanted to implement a Vanilla Neural Network with basic Python, Numpy, and Pandas.
+As of December 8th, 2019, I have finished the purpose of this project. I wanted to implement a Vanilla Neural Network with basic Python, Numpy, and Pandas. I have even added mini-batch gradient descent and Adam optimization algorithm.
 
 I am __*not*__ going to be adding regularization or other kinds of tuning to this neural network.
 
@@ -97,7 +97,7 @@ I had to split the MNIST train set into 32000 (train) and 10000 (test) values si
 
 Since I recently (*on December 9th*) applied [Adam optimization algorithm][4] and mini batch gradient descent to my model, I have achieved better results.
 
-I achieved **98%** accuracy on the training set and **95%** accuracy on the test set. I do not see the model overfitting as of now, so I will have to further assess where exactly I might be able to improve the model in terms of accuracy.
+I achieved **98%** accuracy on the training set and **96%** accuracy on the test set. I do not see the model overfitting as of now, so I will have to further assess where exactly I might be able to improve the model in terms of accuracy.
 
 
 -------
