@@ -51,6 +51,14 @@ All these variables can be passed in by the user, or left empty if the user wish
 
 
 
+**Note: Please download the dependencies using pip in order to run the required libraries for this project.**
+
+
+```bash
+pip install -r requirements.txt
+```
+
+
 To initialize a model, download this repository, open an empty python module (in the same directory as the repository), and import as follows:
 
 
