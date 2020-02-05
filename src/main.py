@@ -46,14 +46,14 @@ def vector_to_digit(initial_predictions, size=None):
 
 
 command_message = "\nList of commands are:" \
-                  "\ne:\tto terminate the program" \
-                  "\nnew :\tto test the new .png image you have inserted" \
-                  "\ntrain adam:\tto train the model on adam optimization algorithm" \
-                  "\ntrain gd:\tto train the model on gradient descent algorithm" \
-                  "\nc:\tto display the cost function of training and validation sets" \
-                  "\nacc:\tto print the accuracies for training and test sets" \
-                  "\ntest:\tto test a new random image from the test set and classify it" \
-                  "\ncommands:\tto print this command list\n\n"
+                  "\ne:          terminate the program" \
+                  "\nnew :       test the new .png image you have inserted" \
+                  "\ntrain adam: train the model on adam optimization algorithm" \
+                  "\ntrain gd:   train the model on gradient descent algorithm" \
+                  "\nc:          display the cost function of training and validation sets" \
+                  "\nacc:        print the accuracies for training and test sets" \
+                  "\ntest:       test a new random image from the test set and classify it" \
+                  "\ncommands:   print this command list\n"
 
 print(command_message)
 
@@ -148,11 +148,11 @@ if __name__ == "__main__":
             tests_accuracy = test_accuracy(test_predictions, ground_truth=labels_test, size=m_test)
 
             print(f"\nAccuracy on training set is: {train_accuracy}%")
-            print(f"Accuracy on test set is: {tests_accuracy}%")
+            print(f"Accuracy on test set is: {tests_accuracy}%\n")
 
         elif user == 'commands':
             print(command_message)
 
-        user = input("\nEnter command: ")
+        user = input("Enter command: ")
 
     print("\nSee you later user.")
