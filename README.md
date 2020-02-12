@@ -51,12 +51,22 @@ All these variables can be passed in by the user, or left empty if the user wish
 
 
 
-**Note: Please download the dependencies using pip in order to run the required libraries for this project.**
+**Note: Please download the libraries using pip in order to run the required libraries for this project.**
 
 
 ```bash
 pip install -r requirements.txt
 ```
+
+**Note: Or download the libraries using conda like below if you use Anaconda**
+
+```bash
+conda env create -f environment.yml
+```
+
+
+Personally, conda environments run much better in PyCharm since they come preinstalled with most libraries. Go [here](https://www.anaconda.com/distribution/#download-section) to download Anaconda for yourself.
+
 
 
 To initialize a model, download this repository, open an empty python module (in the same directory as the repository), and import as follows:
