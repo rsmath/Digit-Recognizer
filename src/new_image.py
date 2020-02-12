@@ -52,6 +52,6 @@ def image_prepare(argv):
     return tva
 
 
-image3 = np.asarray(image_prepare('../digit3.png')).reshape(784, 1)  # file path here
+image = np.asarray(image_prepare('../digit3.png')).reshape(784, 1)  # file path here
 
 

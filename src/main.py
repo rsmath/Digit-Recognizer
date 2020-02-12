@@ -7,7 +7,7 @@ from src.model import VanillaNN, test_accuracy
 from src.prep_data import test_data, train_data, m_train, m_test, labels_train, labels_test
 from matplotlib import pyplot as plt
 import numpy as np
-from src.new_image import image3 as image
+from src.new_image import image
 import time
 
 
