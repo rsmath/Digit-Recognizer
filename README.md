@@ -93,6 +93,12 @@ print(f"\nOutput probabilities are: \t\n{output}\n")
 digit = np.where(output == np.amax(output))[0][0]
 ```
 
+I have recently trained the model on my machine and uploaded the parameters on this repository using the **pickle** library.
+
+If you would like to run the model without training it, run the [main.py](https://github.com/ramanshsharma2806/Digit-Recognizer/blob/master/src/main.py) file and pass in the *test* command as many times as you like!
+(**Note**: when you pass in **test** or **c** (cost), in order to pass in your next command, close the window of the cost function image/predicted digit image)
+
+
 -------
 
 ### Dataset
