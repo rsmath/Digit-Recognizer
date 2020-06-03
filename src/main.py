@@ -124,13 +124,26 @@ if __name__ == "__main__":
             train_costs = pickle.load(pickle_inc)
             cv_costs = pickle.load(pickle_cv)
 
-            plt.plot(train_costs, label="Adam train")
-            plt.plot(cv_costs, label="Adam validation")
-            plt.legend(loc="upper right")
+            width_in_inches = 30
+            height_in_inches = 15
+            dots_per_inch = 50
 
-            plt.title("Cost (train and validation) as the model trains")
-            plt.xlabel('Iterations')
-            plt.ylabel("Cost")
+            plt.figure(
+                figsize=(width_in_inches, height_in_inches),
+                dpi=dots_per_inch)
+
+            plt.plot(train_costs, '^:r', label="Adam train", mew=7, linewidth=3)
+            plt.plot(cv_costs, '^:b', label="Adam validation", mew=7, linewidth=3)
+            plt.legend(loc="upper right", fontsize=25)
+
+            plt.title("Cost (train and validation) as the model trains", fontsize=35, color='black')
+
+            plt.xlabel('Epoch', fontsize=35, color='black')
+            plt.ylabel("Cost", fontsize=35, color='black')
+
+            plt.xticks(range(0, len(train_costs) + 1), fontsize=17, color='black')
+            plt.yticks(fontsize=17, color='black')
+
             plt.show()
             plt.close()
 
