@@ -78,9 +78,10 @@ if __name__ == "__main__":
             pickle_cvcosts.close()
 
         elif user == 'train gd':
-            start = time.process_time()
+            start = time.time()
             parameters, train_costs, cv_costs = model.train(X=train_data, technique='gd')
-            print(f"\nTime taken for {epochs} epochs: {time.process_time() - start} seconds \n")
+            end = time.time()
+            print(f"\nTime taken for 50 epochs: {end - start} seconds \n")
             pickle_out = open("dict.pickle", "wb")
             pickle_cost = open("costs_place.pickle", "wb")
             pickle_cvcosts = open("cv_costs.pickle", "wb")
@@ -132,8 +133,8 @@ if __name__ == "__main__":
                 figsize=(width_in_inches, height_in_inches),
                 dpi=dots_per_inch)
 
-            plt.plot(train_costs, '^:r', label="Adam train", mew=7, linewidth=3)
-            plt.plot(cv_costs, '^:b', label="Adam validation", mew=7, linewidth=3)
+            plt.plot(train_costs, '^:r', label="train", mew=7, linewidth=3)
+            plt.plot(cv_costs, '^:b', label="validation", mew=7, linewidth=3)
             plt.legend(loc="upper right", fontsize=25)
 
             plt.title("Cost (train and validation) as the model trains", fontsize=35, color='black')

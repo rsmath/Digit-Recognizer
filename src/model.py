@@ -114,6 +114,9 @@ class VanillaNN:
         :return: None
         """
 
+        if technique == 'gd':
+            self.iterations = 50
+
         # first the parameters need to be initialized
         self.parameters = initialize_parameters(self.layer_dims)
         self.v, self.s = initialize_adam(self.parameters)
@@ -153,17 +156,31 @@ class VanillaNN:
                 elif technique == 'gd':
                     self.parameters = update_gd_parameters(self.parameters, gradients, self.learning_rate)
 
-            t = 0 # resetting the adam counter
+            if technique == 'adam':
+                t = 0 # resetting the adam counter
 
-            curr_cost = curr_cost / m_train # average cost
-            curr_cv_cost = curr_cv_cost / len(y_cv) # average cost
+                curr_cost = curr_cost / m_train # average cost
+                curr_cv_cost = curr_cv_cost / len(y_cv) # average cost
 
-            self.costs.append(curr_cost)
-            self.cv_costs.append(curr_cv_cost)
+                self.costs.append(curr_cost)
+                self.cv_costs.append(curr_cv_cost)
 
-            # printing the cost every 100 iterations
-            if (i == 0 or i % 10 == 0) and self.print_cost:
-                print(f"Cost for iteration # {i}:  {curr_cost}")
+                # printing the cost every iteration
+                if (i == 0 or i % 1 == 0) and self.print_cost:
+                    print(f"Cost for iteration # {i}:  {curr_cost}")
+
+            elif technique == 'gd':
+                t = 0  # resetting the adam counter
+
+                curr_cost = curr_cost / m_train  # average cost
+                curr_cv_cost = curr_cv_cost / len(y_cv)  # average cost
+
+                self.costs.append(curr_cost)
+                self.cv_costs.append(curr_cv_cost)
+
+                # printing the cost every 10 iterations
+                if (i == 0 or i % 10 == 0) and self.print_cost:
+                    print(f"Cost for iteration # {i}:  {curr_cost}")
 
         return self.parameters, self.costs, self.cv_costs
 
